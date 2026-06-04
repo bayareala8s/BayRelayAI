@@ -1,0 +1,17 @@
+sequenceDiagram
+  autonumber
+  participant Child as SFN s3-to-s3
+  participant WF as Lambda workflow
+  participant S3 as Amazon S3
+  participant DDB as DynamoDB
+
+  Note over Child: Input payload: source_bucket/key, dest_bucket/key
+  Child->>WF: s3_verify_source
+  WF->>S3: HeadObject(source)
+  WF-->>Child: ok
+  Child->>WF: s3_copy
+  WF->>S3: CopyObject dest ← source
+  WF-->>Child: ok
+  Child->>WF: update_execution_status SUCCEEDED
+  WF->>DDB: execution + request status
+  Child->>WF: emit_event

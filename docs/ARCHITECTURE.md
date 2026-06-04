@@ -2,7 +2,7 @@
 
 A consolidated **PNG diagram** of the AWS components and data flows: [bayrelay-architecture.png](bayrelay-architecture.png).
 
-**Sequence diagrams (all customer use cases & features):** [SEQUENCE_DIAGRAMS.md](SEQUENCE_DIAGRAMS.md) — 30+ Mermaid diagrams with index.
+**Sequence diagrams (all customer use cases & features):** [SEQUENCE_DIAGRAMS.md](SEQUENCE_DIAGRAMS.md) — 31 Mermaid diagrams; **PNG pack:** [sequence-diagrams/png/](sequence-diagrams/png/).
 
 ## Layered view
 

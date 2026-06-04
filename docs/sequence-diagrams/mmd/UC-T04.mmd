@@ -1,0 +1,15 @@
+sequenceDiagram
+  autonumber
+  participant Child as SFN sftp-to-sftp
+  participant WF as Lambda workflow
+  participant TF as Transfer connector
+  participant S3 as Amazon S3
+
+  Child->>WF: sftp_relay
+  WF->>TF: Retrieve remote_source_paths → S3 sftp-staging/{execution_id}
+  WF->>TF: Wait retrieve COMPLETED
+  WF->>S3: ListObjects staging prefix
+  WF->>TF: SendFilePaths (staging keys) → remote_dest_directory
+  WF->>TF: Wait send COMPLETED
+  WF-->>Child: ok retrieve_id + send_id
+  Child->>WF: update_execution_status SUCCEEDED

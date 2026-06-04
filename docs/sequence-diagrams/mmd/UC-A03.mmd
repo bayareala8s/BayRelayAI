@@ -1,0 +1,10 @@
+sequenceDiagram
+  autonumber
+  participant S3 as Transfer bucket
+  participant EB as EventBridge
+  participant Disp as transfer_dispatcher
+  participant SFN as Step Functions
+
+  S3->>EB: Object Created sftp-connector/flat-send-*
+  EB->>Disp: dispatch (connector staging only for SFTP_* rules)
+  Disp->>SFN: SFTP_TO_SFTP UC-T04

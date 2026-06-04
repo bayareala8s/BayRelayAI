@@ -1,0 +1,11 @@
+sequenceDiagram
+  autonumber
+  participant P as Applicant
+  participant API as Lambda api
+  participant DDB as DynamoDB
+
+  P->>API: POST /v1/onboarding/requests
+  API->>DDB: SUBMITTED
+  API->>API: approve_request(reviewer=system-auto-approve)
+  API->>DDB: partner + endpoints + APPROVED
+  API-->>P: 201 auto_approved=true

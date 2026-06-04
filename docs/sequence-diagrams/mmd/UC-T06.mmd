@@ -1,0 +1,13 @@
+sequenceDiagram
+  autonumber
+  participant Op as Operator portal
+  participant API as Lambda api
+  participant DDB as DynamoDB
+  participant SFN as Step Functions
+
+  Op->>API: POST /v1/transfers/{request_id}/retry
+  API->>DDB: Load original request
+  API->>API: submit_transfer (new idempotency key, new execution)
+  Note over API: Payload copied from original request
+  API->>SFN: New precheck execution
+  API-->>Op: 202 new request_id (optional navigate)

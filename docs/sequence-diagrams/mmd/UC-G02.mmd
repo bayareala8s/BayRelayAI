@@ -1,0 +1,15 @@
+sequenceDiagram
+  autonumber
+  participant Op as Operator
+  participant API as Lambda api
+  participant BR as Bedrock Agent
+  participant KB as Bedrock Knowledge Base
+  participant AOSS as OpenSearch Serverless
+
+  Op->>API: POST /v1/agent/query (policy / retry question)
+  API->>BR: InvokeAgent
+  BR->>KB: Retrieve (vector search)
+  KB->>AOSS: Query embeddings
+  AOSS-->>KB: Chunks from customer runbooks
+  KB-->>BR: Retrieved passages
+  BR-->>Op: Grounded answer with citations

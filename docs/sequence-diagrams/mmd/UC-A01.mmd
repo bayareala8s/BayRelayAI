@@ -1,0 +1,18 @@
+sequenceDiagram
+  autonumber
+  participant Uploader as Operator / system / SFTP→S3
+  participant S3 as Transfer bucket
+  participant EB as EventBridge
+  participant Disp as Lambda transfer_dispatcher
+  participant Rules as transfer_rules_service
+  participant API as transfers_service
+  participant SFN as Step Functions
+
+  Uploader->>S3: PutObject demo/.../inbound/file.csv
+  S3->>EB: Object Created
+  EB->>Disp: Invoke
+  Disp->>Rules: find_matching_rules(S3_OBJECT_CREATED, key)
+  Rules->>Rules: glob match_pattern, enabled, priority
+  Rules->>API: submit_transfer (idem auto-{rule}-{key})
+  API->>SFN: UC-T01 child flow
+  Disp->>DDB: audit transfer_automation_dispatched

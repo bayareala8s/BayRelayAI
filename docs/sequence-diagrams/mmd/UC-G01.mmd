@@ -1,0 +1,16 @@
+sequenceDiagram
+  autonumber
+  participant Op as Operator portal
+  participant APIGW as API Gateway
+  participant API as Lambda api
+  participant BR as Bedrock Agent
+  participant Tools as Lambda agent_tools
+  participant DDB as DynamoDB
+
+  Op->>APIGW: POST /v1/agent/query {query, session_id}
+  APIGW->>API: InvokeAgent
+  BR->>Tools: Action group (planning / execution OpenAPI)
+  Tools->>DDB: Read partners, transfers, policies
+  Tools-->>BR: Tool results
+  BR-->>API: Completion text (+ optional trace)
+  API-->>Op: agent_response, session_id

@@ -1,0 +1,16 @@
+sequenceDiagram
+  autonumber
+  participant S3 as Transfer bucket
+  participant EB as EventBridge
+  participant Disp as transfer_dispatcher
+  participant SFN as Step Functions
+
+  Note over S3: Rule 1: inbound/sftp/* → S3_TO_SFTP
+  S3->>EB: Object Created (inbound file)
+  EB->>Disp: dispatch
+  Disp->>SFN: S3_TO_SFTP → staging flat-send-*
+
+  Note over S3: Rule 2: sftp-connector/flat-send-* → SFTP_TO_S3
+  S3->>EB: Object Created (staging key)
+  EB->>Disp: dispatch
+  Disp->>SFN: SFTP_TO_S3 → dest_prefix template

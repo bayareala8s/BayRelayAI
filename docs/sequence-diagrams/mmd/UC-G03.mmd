@@ -1,0 +1,14 @@
+sequenceDiagram
+  autonumber
+  participant Eng as Engineer / CI
+  participant Script as kb_sync.sh + start_kb_ingestion.py
+  participant S3 as KB source bucket
+  participant KB as Bedrock KB
+  participant BR as Bedrock Agent
+
+  Eng->>Script: bootstrap_phase3.sh
+  Script->>S3: Sync docs/kb/*.md
+  Script->>KB: StartIngestionJob
+  KB-->>Script: COMPLETE
+  Script->>BR: PrepareAgent (alias)
+  Note over BR: Agent queries use ingested docs (UC-G02)

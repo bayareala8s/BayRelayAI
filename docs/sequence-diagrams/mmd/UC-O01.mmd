@@ -1,0 +1,12 @@
+sequenceDiagram
+  autonumber
+  participant P as Partner (portal /onboarding/new)
+  participant APIGW as API Gateway
+  participant API as Lambda api
+  participant DDB as DynamoDB
+
+  P->>APIGW: POST /v1/onboarding/requests
+  Note over APIGW: JWT partner or operator, or public if flag enabled
+  APIGW->>API: create_request
+  API->>DDB: onboarding SUBMITTED + audit
+  API-->>P: 201 request_id

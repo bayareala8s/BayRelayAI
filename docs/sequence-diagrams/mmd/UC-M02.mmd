@@ -1,0 +1,12 @@
+sequenceDiagram
+  autonumber
+  participant Portal as Portal
+  participant API as ops_service
+  participant DDB as DynamoDB
+
+  Portal->>API: GET /v1/ops/summary
+  API->>DDB: Count partners, endpoints
+  API->>DDB: Sample transfer_requests (status, type)
+  API->>DDB: Sample executions (failed_recent)
+  API->>DDB: Count onboarding SUBMITTED
+  API-->>Portal: health, counts, recent_transfers

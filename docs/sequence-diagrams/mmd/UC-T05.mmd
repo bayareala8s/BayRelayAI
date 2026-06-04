@@ -1,0 +1,10 @@
+sequenceDiagram
+  autonumber
+  participant Client as API client
+  participant API as Lambda api
+  participant DDB as DynamoDB
+
+  Client->>API: POST /v1/transfers (same X-Idempotency-Key)
+  API->>DDB: Get idempotency_keys
+  DDB-->>API: existing transfer_request_id
+  API-->>Client: 200 deduplicated=true (no new SFN)

@@ -1,0 +1,14 @@
+sequenceDiagram
+  autonumber
+  participant Op as Operator browser
+  participant Portal as Portal SPA
+  participant APIGW as API Gateway
+  participant API as Lambda api
+  participant DDB as DynamoDB
+
+  Op->>Portal: /operations
+  Portal->>APIGW: GET /v1/ops/summary
+  APIGW->>API: require_operator
+  API->>DDB: Scan/sample partners, endpoints, transfers, onboarding
+  API-->>Portal: KPIs, by_status, recent_transfers, health
+  Portal-->>Op: LIVE badge, charts / overview

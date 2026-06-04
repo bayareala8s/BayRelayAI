@@ -1,0 +1,17 @@
+sequenceDiagram
+  autonumber
+  participant Op as Operator browser
+  participant Portal as Portal SPA
+  participant Cognito as Amazon Cognito
+  participant APIGW as API Gateway (JWT)
+  participant API as Lambda api
+
+  Op->>Portal: Open /login
+  Op->>Cognito: InitiateAuth (USER_PASSWORD_AUTH)
+  Cognito-->>Op: ID token + access token
+  Op->>Portal: Store tokens (localStorage)
+  Op->>APIGW: GET /v1/me (Bearer JWT)
+  APIGW->>APIGW: Validate JWT (bayrelay-operators)
+  APIGW->>API: Invoke with claims
+  API-->>Op: role=operator, groups, email
+  Op->>Portal: Redirect /operations

@@ -1,0 +1,13 @@
+sequenceDiagram
+  autonumber
+  participant Op as Operator
+  participant API as Lambda api
+  participant DDB as DynamoDB
+  participant Cognito as Cognito
+
+  Op->>API: POST /v1/onboarding/requests/{id}/approve
+  API->>DDB: Create partner + endpoints
+  API->>DDB: request APPROVED
+  API->>Cognito: AdminLinkPartnerUser (if email matches user)
+  Note over Cognito: Sets custom:partner_id, bayrelay-partners group
+  API-->>Op: partner_id, endpoint_ids

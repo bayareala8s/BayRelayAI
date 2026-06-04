@@ -1,0 +1,8 @@
+{
+  "name": "bayrelay-mermaid-tools",
+  "private": true,
+  "description": "Local mermaid-cli for exporting sequence diagram PNGs",
+  "dependencies": {
+    "@mermaid-js/mermaid-cli": "^11.4.0"
+  }
+}

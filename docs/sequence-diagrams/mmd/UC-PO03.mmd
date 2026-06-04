@@ -1,0 +1,13 @@
+sequenceDiagram
+  autonumber
+  participant Op as Operator
+  participant Portal as Portal
+  participant API as Lambda api
+  participant DDB as DynamoDB
+
+  Op->>Portal: /partners search + Edit
+  Portal->>API: PUT /v1/partners/{id}
+  API->>DDB: Update partner
+  Op->>Portal: Disable endpoint
+  Portal->>API: DELETE /v1/endpoints/{id}
+  API->>DDB: Soft delete status=DISABLED

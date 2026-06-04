@@ -1,0 +1,18 @@
+sequenceDiagram
+  autonumber
+  participant Child as SFN s3-to-sftp
+  participant WF as Lambda workflow
+  participant S3 as Amazon S3
+  participant TF as Transfer connector API
+  participant DDB as DynamoDB
+
+  Child->>WF: s3_verify_source
+  WF->>S3: HeadObject
+  Child->>WF: s3_to_sftp_send
+  WF->>S3: CopyObject → flat-send-{execution_id}-{basename}
+  Note over S3: Staging key triggers optional downstream rules
+  WF->>TF: start_file_transfer(SendFilePaths=/bucket/staging-key)
+  TF-->>WF: TransferId
+  WF->>TF: Poll until COMPLETED
+  WF->>DDB: audit s3_to_sftp_completed
+  Child->>WF: update_execution_status SUCCEEDED

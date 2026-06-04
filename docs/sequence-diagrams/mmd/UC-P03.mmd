@@ -1,0 +1,6 @@
+sequenceDiagram
+  participant Client as Client (curl / script)
+  participant APIGW as API Gateway
+
+  Client->>APIGW: POST /v1/partners (no Authorization)
+  APIGW-->>Client: 401 Unauthorized

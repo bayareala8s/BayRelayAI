@@ -1,0 +1,10 @@
+sequenceDiagram
+  autonumber
+  participant Op as Operator
+  participant API as Lambda api
+  participant DDB as DynamoDB
+
+  Note over DDB: Audits: transfer_submitted, onboarding_*, automation, sftp_inbound, cancel
+  Op->>API: GET /v1/audit-events?q=&correlation_id=
+  API->>DDB: Scan/filter audit_events
+  API-->>Op: events[], count

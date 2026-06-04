@@ -1,0 +1,14 @@
+sequenceDiagram
+  autonumber
+  participant Child as SFN sftp-to-s3
+  participant WF as Lambda workflow
+  participant TF as Transfer connector
+  participant S3 as Amazon S3
+  participant DDB as DynamoDB
+
+  Child->>WF: sftp_retrieve_to_s3
+  WF->>TF: start_file_transfer(RetrieveFilePaths, LocalDirectoryPath=/bucket/prefix)
+  TF->>S3: Connector writes retrieved files
+  WF->>TF: Wait COMPLETED
+  WF->>DDB: Update execution summary
+  Child->>WF: update_execution_status SUCCEEDED

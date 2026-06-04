@@ -1,0 +1,29 @@
+sequenceDiagram
+  autonumber
+  participant Client as Portal / API / Agent tools
+  participant APIGW as API Gateway
+  participant API as Lambda api
+  participant DDB as DynamoDB
+  participant SFN as SFN transfer-precheck
+  participant WF as Lambda workflow
+  participant Child as Child SFN (type-specific)
+  participant EB as EventBridge
+
+  Client->>APIGW: POST /v1/transfers + Idempotency-Key
+  APIGW->>API: JWT + body
+  API->>DDB: Check idempotency_keys
+  alt Duplicate idempotency key
+    API-->>Client: 200 deduplicated request_id
+  else New request
+    API->>DDB: transfer_requests SUBMITTED
+    API->>DDB: transfer_executions QUEUED
+    API->>DDB: idempotency + audit transfer_submitted
+    API->>SFN: StartExecution(input)
+    API-->>Client: 202 request_id, execution_id, sfn_arn
+    SFN->>WF: precheck_all (validate, policy, route)
+    WF-->>SFN: child_state_machine_arn + child_input
+    SFN->>Child: startExecution.sync
+    Child->>WF: verify / transfer tasks
+    Child->>DDB: update_execution_status
+    Child->>EB: emit_event (transfer completed/failed)
+  end

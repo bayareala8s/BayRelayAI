@@ -1,0 +1,18 @@
+sequenceDiagram
+  autonumber
+  participant Partner as Partner (FileZilla)
+  participant SFTP as Transfer Family server
+  participant S3 as Transfer bucket
+  participant Audit as Lambda sftp_inbound
+  participant EB as EventBridge
+  participant Disp as transfer_dispatcher
+
+  Partner->>SFTP: Upload file
+  SFTP->>S3: Logical mapping → sftp-inbound/...
+  S3->>EB: Object Created
+  par Parallel paths
+    EB->>Audit: sftp_inbound audit only
+  and Automation path
+    EB->>Disp: trigger SFTP_INBOUND or S3_OBJECT
+    Disp->>Disp: Rule match demo/... (S3_TO_S3)
+  end

@@ -1,0 +1,19 @@
+sequenceDiagram
+  autonumber
+  participant Op as Operator
+  participant API as Lambda api
+  participant DDB as DynamoDB
+  participant SFN as SFN precheck
+  participant WF as Lambda workflow
+
+  Op->>API: PUT /v1/routing-policies (effect=DENY)
+  API->>DDB: policy default + partner_id
+
+  Op->>API: POST /v1/transfers
+  API->>DDB: request + execution SUBMITTED/QUEUED
+  API->>SFN: StartExecution precheck
+  SFN->>WF: precheck_all
+  WF->>DDB: Get policy → DENY
+  WF-->>SFN: ok=false POLICY_DENIED
+  SFN-->>API: Failed
+  API->>DDB: execution FAILED

@@ -1,0 +1,16 @@
+sequenceDiagram
+  autonumber
+  participant Op as Operator (portal or API)
+  participant APIGW as API Gateway
+  participant API as Lambda api
+  participant DDB as DynamoDB
+
+  Op->>APIGW: POST /v1/partners {name}
+  APIGW->>API: require_operator
+  API->>DDB: PutItem partners (ACTIVE)
+  API-->>Op: 201 partner_id
+
+  Op->>APIGW: POST /v1/endpoints {partner_id, protocol, direction}
+  APIGW->>API: require_operator
+  API->>DDB: PutItem endpoints
+  API-->>Op: 201 endpoint_id

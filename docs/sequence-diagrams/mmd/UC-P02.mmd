@@ -1,0 +1,15 @@
+sequenceDiagram
+  autonumber
+  participant P as Partner browser
+  participant Cognito as Amazon Cognito
+  participant APIGW as API Gateway
+  participant API as Lambda api
+  participant DDB as DynamoDB
+
+  P->>Cognito: Sign in (custom:partner_id set)
+  P->>APIGW: GET /v1/transfers?limit=10
+  APIGW->>API: JWT claims partner_id=PRT-xxx
+  API->>API: enforce_partner_scope
+  API->>DDB: Scan/filter requests by partner_id
+  API-->>P: Only partner's transfers
+  Note over API: Operators see all partners

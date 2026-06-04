@@ -36,6 +36,7 @@ Attach or link these assets for prospects and PoC buyers.
 |-------|------|
 | Architecture diagram | `docs/bayrelay-architecture.png` |
 | Sequence diagrams (all flows) | `docs/SEQUENCE_DIAGRAMS.md` |
+| Sequence diagram PNGs (31) | `docs/sequence-diagrams/png/` |
 | Architecture narrative | `docs/ARCHITECTURE.md` |
 | Pricing | `docs/PRICING.md` |
 | Portal v2 features | `docs/OPERATOR_PORTAL_V2.md` |

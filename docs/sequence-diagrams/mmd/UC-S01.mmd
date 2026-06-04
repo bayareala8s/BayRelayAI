@@ -1,0 +1,13 @@
+sequenceDiagram
+  autonumber
+  participant Partner as Partner SFTP client
+  participant Srv as Transfer Family SFTP server
+  participant S3 as S3 (logical home)
+  participant EB as EventBridge
+  participant Audit as sftp_inbound Lambda
+
+  Partner->>Srv: SFTP PUT /file.dat
+  Srv->>S3: Object sftp-inbound/.../file.dat
+  S3->>EB: Object Created
+  EB->>Audit: Audit sftp_inbound_object_created
+  Note over S3: Use S3→S3 automation on sftp-inbound prefix (UC-A04)

@@ -1,0 +1,27 @@
+sequenceDiagram
+  autonumber
+  participant Prospect as Prospect / Partner user
+  participant Portal as Operator portal
+  participant API as BayRelay API
+  participant DDB as DynamoDB
+  participant SFN as Step Functions
+  participant S3 as Transfer bucket
+  participant SFTP as Transfer Family
+
+  Prospect->>Portal: Visit landing / Apply as partner
+  Prospect->>API: POST /v1/onboarding/requests
+  API->>DDB: onboarding request SUBMITTED
+  Note over API: Optional auto-approve (demo)
+  API->>DDB: partner + endpoints provisioned
+
+  Prospect->>Portal: Sign in (Cognito partner)
+  Prospect->>API: POST /v1/transfers (or upload via SFTP)
+  alt Manual transfer
+    API->>SFN: Start precheck → child workflow
+    SFN->>S3: verify / copy / connector I/O
+  else Automation
+    S3-->>API: S3 Object Created event
+    API->>SFN: Rule match → submit_transfer
+  end
+  SFN->>DDB: execution SUCCEEDED / FAILED
+  Prospect->>Portal: View transfers / status

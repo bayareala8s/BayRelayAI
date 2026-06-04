@@ -1,0 +1,16 @@
+sequenceDiagram
+  autonumber
+  participant Op as Operator / Partner
+  participant API as Lambda api
+  participant DDB as DynamoDB
+
+  Op->>API: POST /v1/transfers/{request_id}/cancel
+  API->>DDB: Get request
+  alt Terminal status (SUCCEEDED/FAILED/CANCELLED)
+    API-->>Op: 409 cannot cancel
+  else Active status
+    API->>DDB: status=CANCELLED
+    API->>DDB: audit transfer_cancelled
+    API-->>Op: 200 CANCELLED
+  end
+  Note over API: Does not stop running SFN (status marker only)

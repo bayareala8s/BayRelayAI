@@ -5,43 +5,45 @@ Companion: [ARCHITECTURE.md](ARCHITECTURE.md) · [DEMO_CATALOG.md](DEMO_CATALOG.
 
 Render Mermaid in GitHub, VS Code, or [mermaid.live](https://mermaid.live).
 
+**PNG exports:** all **31** diagrams are in [`sequence-diagrams/png/`](sequence-diagrams/png/) (regenerate: `./scripts/export_sequence_diagram_pngs.sh`).
+
 ---
 
 ## Index
 
-| ID | Diagram | Category |
-|----|---------|----------|
-| [UC-00](#uc-00-customer-journey-overview) | Customer journey overview | Overview |
-| [UC-P01](#uc-p01-operator-portal-sign-in) | Operator portal sign-in | Platform |
-| [UC-P02](#uc-p02-partner-portal-sign-in-scoped-api) | Partner portal sign-in | Platform |
-| [UC-P03](#uc-p03-api-call-without-jwt-rejected) | Unauthenticated API | Platform |
-| [UC-C01](#uc-c01-register-partner-and-endpoints) | Register partner & endpoints | Control plane |
-| [UC-C02](#uc-c02-routing-policy-deny-blocks-transfer) | Routing policy DENY | Control plane |
-| [UC-T00](#uc-t00-manual-transfer-submit-common-path) | Manual transfer (common path) | Transfers |
-| [UC-T01](#uc-t01-s3--s3-transfer) | S3 → S3 | Transfers |
-| [UC-T02](#uc-t02-s3--sftp-transfer) | S3 → SFTP | Transfers |
-| [UC-T03](#uc-t03-sftp--s3-transfer) | SFTP → S3 | Transfers |
-| [UC-T04](#uc-t04-sftp--sftp-relay-transfer) | SFTP → SFTP | Transfers |
-| [UC-T05](#uc-t05-idempotent-transfer-resubmit) | Idempotent resubmit | Transfers |
-| [UC-T06](#uc-t06-retry-failed-transfer) | Retry transfer | Transfers |
-| [UC-T07](#uc-t07-cancel-in-flight-transfer) | Cancel transfer | Transfers |
-| [UC-A01](#uc-a01-automation-s3--s3-on-object-created) | Automation S3→S3 | Automation |
-| [UC-A02](#uc-a02-automation-chain-s3--sftp--sftp--s3) | Automation S3→SFTP→SFTP→S3 | Automation |
-| [UC-A03](#uc-a03-automation-sftp--sftp-on-connector-staging) | Automation SFTP→SFTP | Automation |
-| [UC-A04](#uc-a04-partner-sftp-inbound--s3--s3-automation) | Inbound SFTP → S3→S3 | Automation |
-| [UC-O01](#uc-o01-partner-submits-onboarding-request) | Partner onboarding submit | Onboarding |
-| [UC-O02](#uc-o02-operator-approves-onboarding) | Operator approve onboarding | Onboarding |
-| [UC-O03](#uc-o03-onboarding-auto-approve-demo) | Auto-approve (demo tfvars) | Onboarding |
-| [UC-O04](#uc-o04-operator-rejects-onboarding) | Reject onboarding | Onboarding |
-| [UC-PO01](#uc-po01-operator-operations-dashboard) | Operations dashboard | Portal |
-| [UC-PO02](#uc-po02-operator-creates-transfer-rule) | Create automation rule | Portal |
-| [UC-PO03](#uc-po03-portal-partner-endpoint-crud) | Partner/endpoint CRUD | Portal |
-| [UC-G01](#uc-g01-bedrock-agent-query-with-tools) | Agent query + tools | Agent |
-| [UC-G02](#uc-g02-kb-grounded-policy-answer) | KB-grounded answer | Agent |
-| [UC-G03](#uc-g03-knowledge-base-sync-and-ingestion) | KB sync & ingestion | Agent |
-| [UC-S01](#uc-s01-partner-upload-via-managed-sftp-server) | Partner SFTP upload | SFTP inbound |
-| [UC-M01](#uc-m01-audit-trail-and-list-audit-events) | Audit trail | Operations |
-| [UC-M02](#uc-m02-ops-summary-dashboard-data) | Ops summary | Operations |
+| ID | Diagram | PNG | Category |
+|----|---------|-----|----------|
+| [UC-00](#uc-00-customer-journey-overview) | Customer journey overview | [png](sequence-diagrams/png/UC-00.png) | Overview |
+| [UC-P01](#uc-p01-operator-portal-sign-in) | Operator portal sign-in | [png](sequence-diagrams/png/UC-P01.png) | Platform |
+| [UC-P02](#uc-p02-partner-portal-sign-in-scoped-api) | Partner portal sign-in | [png](sequence-diagrams/png/UC-P02.png) | Platform |
+| [UC-P03](#uc-p03-api-call-without-jwt-rejected) | Unauthenticated API | [png](sequence-diagrams/png/UC-P03.png) | Platform |
+| [UC-C01](#uc-c01-register-partner-and-endpoints) | Register partner & endpoints | [png](sequence-diagrams/png/UC-C01.png) | Control plane |
+| [UC-C02](#uc-c02-routing-policy-deny-blocks-transfer) | Routing policy DENY | [png](sequence-diagrams/png/UC-C02.png) | Control plane |
+| [UC-T00](#uc-t00-manual-transfer-submit-common-path) | Manual transfer (common path) | [png](sequence-diagrams/png/UC-T00.png) | Transfers |
+| [UC-T01](#uc-t01-s3--s3-transfer) | S3 → S3 | [png](sequence-diagrams/png/UC-T01.png) | Transfers |
+| [UC-T02](#uc-t02-s3--sftp-transfer) | S3 → SFTP | [png](sequence-diagrams/png/UC-T02.png) | Transfers |
+| [UC-T03](#uc-t03-sftp--s3-transfer) | SFTP → S3 | [png](sequence-diagrams/png/UC-T03.png) | Transfers |
+| [UC-T04](#uc-t04-sftp--sftp-relay-transfer) | SFTP → SFTP | [png](sequence-diagrams/png/UC-T04.png) | Transfers |
+| [UC-T05](#uc-t05-idempotent-transfer-resubmit) | Idempotent resubmit | [png](sequence-diagrams/png/UC-T05.png) | Transfers |
+| [UC-T06](#uc-t06-retry-failed-transfer) | Retry transfer | [png](sequence-diagrams/png/UC-T06.png) | Transfers |
+| [UC-T07](#uc-t07-cancel-in-flight-transfer) | Cancel transfer | [png](sequence-diagrams/png/UC-T07.png) | Transfers |
+| [UC-A01](#uc-a01-automation-s3--s3-on-object-created) | Automation S3→S3 | [png](sequence-diagrams/png/UC-A01.png) | Automation |
+| [UC-A02](#uc-a02-automation-chain-s3--sftp--sftp--s3) | Automation S3→SFTP→SFTP→S3 | [png](sequence-diagrams/png/UC-A02.png) | Automation |
+| [UC-A03](#uc-a03-automation-sftp--sftp-on-connector-staging) | Automation SFTP→SFTP | [png](sequence-diagrams/png/UC-A03.png) | Automation |
+| [UC-A04](#uc-a04-partner-sftp-inbound--s3--s3-automation) | Inbound SFTP → S3→S3 | [png](sequence-diagrams/png/UC-A04.png) | Automation |
+| [UC-O01](#uc-o01-partner-submits-onboarding-request) | Partner onboarding submit | [png](sequence-diagrams/png/UC-O01.png) | Onboarding |
+| [UC-O02](#uc-o02-operator-approves-onboarding) | Operator approve onboarding | [png](sequence-diagrams/png/UC-O02.png) | Onboarding |
+| [UC-O03](#uc-o03-onboarding-auto-approve-demo) | Auto-approve (demo tfvars) | [png](sequence-diagrams/png/UC-O03.png) | Onboarding |
+| [UC-O04](#uc-o04-operator-rejects-onboarding) | Reject onboarding | [png](sequence-diagrams/png/UC-O04.png) | Onboarding |
+| [UC-PO01](#uc-po01-operator-operations-dashboard) | Operations dashboard | [png](sequence-diagrams/png/UC-PO01.png) | Portal |
+| [UC-PO02](#uc-po02-operator-creates-transfer-rule) | Create automation rule | [png](sequence-diagrams/png/UC-PO02.png) | Portal |
+| [UC-PO03](#uc-po03-portal-partner-endpoint-crud) | Partner/endpoint CRUD | [png](sequence-diagrams/png/UC-PO03.png) | Portal |
+| [UC-G01](#uc-g01-bedrock-agent-query-with-tools) | Agent query + tools | [png](sequence-diagrams/png/UC-G01.png) | Agent |
+| [UC-G02](#uc-g02-kb-grounded-policy-answer) | KB-grounded answer | [png](sequence-diagrams/png/UC-G02.png) | Agent |
+| [UC-G03](#uc-g03-knowledge-base-sync-and-ingestion) | KB sync & ingestion | [png](sequence-diagrams/png/UC-G03.png) | Agent |
+| [UC-S01](#uc-s01-partner-upload-via-managed-sftp-server) | Partner SFTP upload | [png](sequence-diagrams/png/UC-S01.png) | SFTP inbound |
+| [UC-M01](#uc-m01-audit-trail-and-list-audit-events) | Audit trail | [png](sequence-diagrams/png/UC-M01.png) | Operations |
+| [UC-M02](#uc-m02-ops-summary-dashboard-data) | Ops summary | [png](sequence-diagrams/png/UC-M02.png) | Operations |
 
 ---
 
@@ -472,7 +474,7 @@ sequenceDiagram
   participant DDB as DynamoDB
 
   P->>APIGW: POST /v1/onboarding/requests
-  Note over APIGW: JWT partner or operator; public if flag enabled
+  Note over APIGW: JWT partner or operator, or public if flag enabled
   APIGW->>API: create_request
   API->>DDB: onboarding SUBMITTED + audit
   API-->>P: 201 request_id
@@ -736,9 +738,11 @@ sequenceDiagram
 
 ## Exporting diagrams
 
-- **PNG per diagram:** paste a single ` ```mermaid ` block into [mermaid.live](https://mermaid.live) → Export PNG/SVG.
-- **PDF pack:** include this file in `export_sales_pdfs.sh` optional pass (pandoc + mermaid-filter) or attach to proposals as technical appendix.
-- **Architecture deck:** copy UC-00, UC-T00, UC-A02, UC-O02 into executive + technical slides.
+- **Regenerate all PNGs:** `./scripts/export_sequence_diagram_pngs.sh` (requires Node/npm; uses Chrome via Puppeteer, or falls back to [mermaid.ink](https://mermaid.ink)).
+- **Output:** `docs/sequence-diagrams/png/UC-*.png` and source `.mmd` under `docs/sequence-diagrams/mmd/`.
+- **Single diagram:** paste one ` ```mermaid ` block into [mermaid.live](https://mermaid.live) → Export PNG/SVG.
+- **PDF pack:** attach PNGs or this file to proposals as a technical appendix (`export_sales_pdfs.sh` for one-pagers/SOWs).
+- **Architecture deck:** UC-00, UC-T00, UC-A02, UC-O02 PNGs work well in executive + technical slides.
 
 ---
 

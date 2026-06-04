@@ -1,0 +1,12 @@
+sequenceDiagram
+  autonumber
+  participant Op as Operator
+  participant Portal as Portal
+  participant API as Lambda api
+  participant DDB as DynamoDB
+
+  Op->>Portal: /rules → Create rule form
+  Portal->>API: POST /v1/transfer-rules
+  API->>DDB: PutItem rule (enabled, priority, match_pattern, payload_template)
+  API-->>Portal: 201 rule
+  Note over S3: Next object match triggers UC-A01
