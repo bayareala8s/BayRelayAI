@@ -35,7 +35,7 @@ Full guide: **[docs/DEMO_LIFECYCLE.md](docs/DEMO_LIFECYCLE.md)** · Demo catalog
 - `modules/` — Terraform modules
 - `app/lambdas/unified/` — API, workflow, agent_tools handlers
 - `portal/` — React operator portal (Vite SPA)
-- `docs/` — architecture, deployment, demo, sales
+- `docs/` — architecture, [sequence diagrams](docs/SEQUENCE_DIAGRAMS.md), deployment, demo, sales
 - `scripts/` — demo start/stop, bootstrap, smoke tests
 - `tests/` — unit tests
 
