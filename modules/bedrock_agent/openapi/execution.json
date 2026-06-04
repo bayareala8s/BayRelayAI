@@ -1,0 +1,162 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "TransferExecutionActions",
+    "version": "1.0.0",
+    "description": "Submit and control transfer executions."
+  },
+  "paths": {
+    "/submitTransferRequest": {
+      "post": {
+        "summary": "Submit a new transfer",
+        "description": "Persist transfer request and start precheck Step Functions workflow. Requires idempotency_key.",
+        "operationId": "submitTransferRequest",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "partner_id": { "type": "string", "description": "Partner id." },
+                  "source_endpoint_id": { "type": "string", "description": "Source endpoint id." },
+                  "target_endpoint_id": { "type": "string", "description": "Target endpoint id." },
+                  "transfer_type": { "type": "string", "description": "Transfer type enum." },
+                  "payload": { "type": "object", "description": "S3 keys, paths, etc." },
+                  "idempotency_key": { "type": "string", "description": "Client-supplied idempotency key." },
+                  "correlation_id": { "type": "string", "description": "Tracing id." },
+                  "operator_summary": { "type": "string", "description": "Short human summary." }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Submission result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": { "type": "object", "description": "API-style body with request_id, execution_id, etc." },
+                    "ok": { "type": "boolean", "description": "Whether call succeeded." },
+                    "status_code": { "type": "integer", "description": "HTTP-equivalent status." }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/startTransferExecution": {
+      "post": {
+        "summary": "Start execution",
+        "description": "Placeholder for explicit start after submit; use submit for Phase 1.",
+        "operationId": "startTransferExecution",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "execution_id": { "type": "string", "description": "Execution id." }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Start status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string", "description": "Status message." },
+                    "props": { "type": "object", "description": "Echo properties." }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/retryTransferExecution": {
+      "post": {
+        "summary": "Retry failed execution",
+        "description": "Phase 2: operator retry of a failed execution.",
+        "operationId": "retryTransferExecution",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "execution_id": { "type": "string", "description": "Execution id." }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Retry status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "description": "Implementation status." },
+                    "execution_id": { "type": "string", "description": "Execution id." }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cancelTransferExecution": {
+      "post": {
+        "summary": "Cancel execution",
+        "description": "Phase 2: cancel a running execution.",
+        "operationId": "cancelTransferExecution",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "execution_id": { "type": "string", "description": "Execution id." }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cancel status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "description": "Implementation status." },
+                    "execution_id": { "type": "string", "description": "Execution id." }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

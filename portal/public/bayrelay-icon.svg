@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="BayRelay">
+  <!-- MerchantOS-style stacked chevron shield — BayRelay gold / teal / navy -->
+  <path fill="#c9a227" d="M18 11h28l8 13H10z"/>
+  <path fill="#0d8fad" d="M14 27h36l8 14H6z"/>
+  <path
+    fill="#0a1f33"
+    d="M10 44h44l6 11.5C60 61.5 48 63.5 32 63.5 16 63.5 4 61.5 4 55.5L10 44z"
+  />
+</svg>

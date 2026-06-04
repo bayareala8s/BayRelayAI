@@ -1,0 +1,26 @@
+# Copy to terraform.tfvars before: terraform init && terraform apply
+# Production checklist: docs/PRODUCTION_CHECKLIST.md
+
+aws_region       = "us-west-2"
+project          = "bayrelay"
+environment      = "prod"
+foundation_model = "meta.llama3-1-8b-instruct-v1:0"
+create_vpc       = false
+
+enable_api_jwt_auth      = true
+enable_waf               = false
+enable_cloudfront_waf    = true
+allow_agent_trace_header = false
+
+kb_force_destroy                   = false
+transfer_data_bucket_force_destroy = false
+
+enable_transfer_family        = true
+enable_bedrock_vector_kb      = true
+bedrock_kb_embedding_model_id = "amazon.titan-embed-text-v1"
+
+bedrock_prepare_agent = true
+# After deploy: ./scripts/publish_bedrock_prod_alias.sh --write-tfvars && terraform apply
+bedrock_agent_alias_id = "TSTALIASID"
+
+alarm_subscription_emails = ["ops@yourcompany.com"]

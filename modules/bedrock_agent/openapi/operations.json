@@ -1,0 +1,162 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "OperationsActions",
+    "version": "1.0.0",
+    "description": "Operational queries for transfers and runbooks."
+  },
+  "paths": {
+    "/getTransferStatus": {
+      "post": {
+        "summary": "Get transfer request status",
+        "description": "Look up live status by request_id from DynamoDB. Never invent ids.",
+        "operationId": "getTransferStatus",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "request_id": { "type": "string", "description": "Transfer request id." }
+                },
+                "required": ["request_id"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Transfer record",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "transfer_request": {
+                      "type": "object",
+                      "description": "DynamoDB item or null if missing."
+                    },
+                    "error": { "type": "string", "description": "Error code if any." }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/listRecentFailures": {
+      "post": {
+        "summary": "List recent failures",
+        "description": "Phase 1 returns empty list; production uses GSI query.",
+        "operationId": "listRecentFailures",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "partner_id": { "type": "string", "description": "Optional partner filter." }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Failure list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": { "type": "object" },
+                      "description": "Failed transfer summaries."
+                    },
+                    "note": { "type": "string", "description": "Implementation note." }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/summarizeFailure": {
+      "post": {
+        "summary": "Summarize a failure",
+        "description": "Return high-level guidance for an execution_id.",
+        "operationId": "summarizeFailure",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "execution_id": { "type": "string", "description": "Execution id." }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "summary": { "type": "string", "description": "Plain English summary." },
+                    "execution_id": { "type": "string", "description": "Execution id." }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/generateRunbookAdvice": {
+      "post": {
+        "summary": "Runbook pointers",
+        "description": "Points operators to KB-grounded runbooks; combine with knowledge base for detail.",
+        "operationId": "generateRunbookAdvice",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "topic": { "type": "string", "description": "Topic or symptom." }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Advice",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "advice": { "type": "string", "description": "Guidance text." },
+                    "topic": { "type": "string", "description": "Topic echoed." }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "BayRelayAgentTools",
+    "version": "1.0.0",
+    "description": "Single entrypoint for all BayRelay control-plane tools. Pass operation name and parameters; never invent ids or secrets."
+  },
+  "paths": {
+    "/executeAction": {
+      "post": {
+        "summary": "Execute one BayRelay tool",
+        "description": "Invoke exactly one backend operation by name. Use validateTransferRequest and checkPolicyCompliance before submitTransferRequest. For live state use getTransferStatus. Operations: validateTransferRequest, classifyTransferType, buildExecutionPlan, checkPolicyCompliance, estimateTransferMethod, submitTransferRequest, startTransferExecution, retryTransferExecution, cancelTransferExecution, getTransferStatus, listRecentFailures, summarizeFailure, generateRunbookAdvice, registerPartner, registerEndpoint, disableEndpoint, rotateCredentialReference.",
+        "operationId": "executeAction",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "operation": {
+                    "type": "string",
+                    "description": "Tool name matching the API, e.g. validateTransferRequest or submitTransferRequest."
+                  },
+                  "parameters": {
+                    "type": "object",
+                    "description": "Key-value arguments for that tool (partner_id, transfer_type, request_id, etc.)."
+                  }
+                },
+                "required": ["operation"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tool result as JSON object from the Lambda implementation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "description": "Payload returned by the selected tool."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "TransferPlanningActions",
+    "version": "1.0.0",
+    "description": "Planning and validation tools for file transfers."
+  },
+  "paths": {
+    "/validateTransferRequest": {
+      "post": {
+        "summary": "Validate transfer parameters",
+        "description": "Call when the user wants to submit or plan a transfer. Validates partner and endpoint identifiers and transfer type before execution.",
+        "operationId": "validateTransferRequest",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "partner_id": { "type": "string", "description": "Partner identifier." },
+                  "source_endpoint_id": { "type": "string", "description": "Source endpoint identifier." },
+                  "target_endpoint_id": { "type": "string", "description": "Target endpoint identifier." },
+                  "transfer_type": { "type": "string", "description": "One of S3_TO_S3, S3_TO_SFTP, SFTP_TO_S3, SFTP_TO_SFTP." },
+                  "correlation_id": { "type": "string", "description": "Optional correlation id for tracing." }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Validation outcome",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": { "type": "boolean", "description": "True if validation passed." },
+                    "error": { "type": "string", "description": "Error code if validation failed." },
+                    "missing": {
+                      "type": "array",
+                      "items": { "type": "string" },
+                      "description": "Missing field names if any."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/classifyTransferType": {
+      "post": {
+        "summary": "Classify transfer type",
+        "description": "Use when the user describes a transfer in words and you need to confirm the transfer_type enum.",
+        "operationId": "classifyTransferType",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "transfer_type": { "type": "string", "description": "Proposed transfer type." }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Classification result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "transfer_type": { "type": "string", "description": "Normalized transfer type." },
+                    "error": { "type": "string", "description": "Error code if invalid." },
+                    "message": { "type": "string", "description": "Detail message." }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/buildExecutionPlan": {
+      "post": {
+        "summary": "Build execution plan",
+        "description": "After validation, call to get recommended execution method and workflow identifiers.",
+        "operationId": "buildExecutionPlan",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "transfer_type": { "type": "string", "description": "Transfer type." }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Execution plan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "transfer_type": { "type": "string", "description": "Transfer type." },
+                    "recommended_method": { "type": "string", "description": "e.g. S3_COPY or TRANSFER_FAMILY_CONNECTOR." },
+                    "step_function_precheck_name_suffix": { "type": "string", "description": "Precheck state machine name suffix." }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/checkPolicyCompliance": {
+      "post": {
+        "summary": "Check routing policy",
+        "description": "Call before any execution-changing action to verify partner is allowed.",
+        "operationId": "checkPolicyCompliance",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "partner_id": { "type": "string", "description": "Partner id." },
+                  "policy_id": { "type": "string", "description": "Optional policy id, default applied if omitted." }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Policy check result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "allowed": { "type": "boolean", "description": "Whether transfer is allowed." },
+                    "reason": { "type": "string", "description": "Denial reason code if not allowed." },
+                    "policy_id": { "type": "string", "description": "Policy evaluated." }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/estimateTransferMethod": {
+      "post": {
+        "summary": "Estimate transfer method",
+        "description": "Returns recommended AWS path (S3 copy vs connector vs staging) for the transfer type.",
+        "operationId": "estimateTransferMethod",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "transfer_type": { "type": "string", "description": "Transfer type." }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Method estimate",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "transfer_type": { "type": "string", "description": "Transfer type." },
+                    "recommended_method": { "type": "string", "description": "Recommended integration path." },
+                    "step_function_precheck_name_suffix": { "type": "string", "description": "Precheck workflow suffix." }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

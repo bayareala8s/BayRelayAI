@@ -1,0 +1,167 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "AdminActions",
+    "version": "1.0.0",
+    "description": "Register partners and endpoints."
+  },
+  "paths": {
+    "/registerPartner": {
+      "post": {
+        "summary": "Register a partner",
+        "description": "Create a partner record. Do not invent partner_id; omit to auto-generate.",
+        "operationId": "registerPartner",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "partner_id": { "type": "string", "description": "Optional explicit partner id." },
+                  "name": { "type": "string", "description": "Display name." },
+                  "metadata": { "type": "object", "description": "Arbitrary metadata." }
+                },
+                "required": ["name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Partner created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "partner_id": { "type": "string", "description": "Assigned partner id." },
+                    "error": { "type": "string", "description": "Error code if failed." },
+                    "message": { "type": "string", "description": "Validation message." }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/registerEndpoint": {
+      "post": {
+        "summary": "Register an endpoint",
+        "description": "Create endpoint row linked to partner.",
+        "operationId": "registerEndpoint",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "endpoint_id": { "type": "string", "description": "Optional explicit endpoint id." },
+                  "partner_id": { "type": "string", "description": "Partner id." },
+                  "protocol": { "type": "string", "description": "e.g. S3, SFTP." },
+                  "direction": { "type": "string", "description": "INBOUND or OUTBOUND." },
+                  "config_ref": { "type": "string", "description": "Secrets Manager or config reference." }
+                },
+                "required": ["partner_id", "protocol", "direction"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Endpoint created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "endpoint_id": { "type": "string", "description": "Assigned endpoint id." },
+                    "error": { "type": "string", "description": "Error code if failed." },
+                    "message": { "type": "string", "description": "Validation message." }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/disableEndpoint": {
+      "post": {
+        "summary": "Disable an endpoint",
+        "description": "Mark endpoint DISABLED.",
+        "operationId": "disableEndpoint",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "endpoint_id": { "type": "string", "description": "Endpoint id." }
+                },
+                "required": ["endpoint_id"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Disable result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "endpoint_id": { "type": "string", "description": "Endpoint id." },
+                    "status": { "type": "string", "description": "New status." },
+                    "error": { "type": "string", "description": "Error code if failed." }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rotateCredentialReference": {
+      "post": {
+        "summary": "Rotate credential reference",
+        "description": "Phase 2: point endpoint to new secret without exposing secret value.",
+        "operationId": "rotateCredentialReference",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "endpoint_id": { "type": "string", "description": "Endpoint id." }
+                },
+                "required": ["endpoint_id"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Rotation status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "description": "Implementation status." },
+                    "endpoint_id": { "type": "string", "description": "Endpoint id." }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

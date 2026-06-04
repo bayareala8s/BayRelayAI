@@ -1,0 +1,13 @@
+{
+  "partner_id": "PRT-example",
+  "source_endpoint_id": "EPT-src-s3",
+  "target_endpoint_id": "EPT-dst-s3",
+  "transfer_type": "S3_TO_S3",
+  "operator_summary": "Sample S3 to S3 copy",
+  "payload": {
+    "source_bucket": "bayrelay-dev-transfer-data-ACCOUNT_ID",
+    "source_key": "inbound/sample.txt",
+    "dest_bucket": "bayrelay-dev-transfer-data-ACCOUNT_ID",
+    "dest_key": "archive/sample.txt"
+  }
+}

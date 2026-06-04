@@ -1,0 +1,32 @@
+# Customer AWS deployment — copy to terraform.tfvars and fill in with customer.
+# Guide: docs/CUSTOMER_AWS_DEPLOYMENT.md
+
+# --- Customer identity ---
+# aws_region       = "us-west-2"     # customer chosen region
+# project          = "bayrelay"       # or customer short name (affects resource names)
+environment      = "prod"
+
+# --- Bedrock (must be enabled in customer account for this region) ---
+foundation_model = "anthropic.claude-3-sonnet-20240229-v1:0"
+bedrock_kb_embedding_model_id = "amazon.titan-embed-text-v1"
+
+# --- Security (recommended for customer prod) ---
+enable_api_jwt_auth      = true
+enable_waf               = true
+allow_agent_trace_header = false
+
+# --- Features ---
+enable_transfer_family   = true   # set false to skip SFTP hourly cost during PoC
+enable_bedrock_vector_kb = true   # set false to skip OpenSearch OCUs during PoC
+
+# --- Data retention (keep false for customer prod) ---
+kb_force_destroy                   = false
+transfer_data_bucket_force_destroy = false
+
+# --- After Bedrock console: publish alias, then set and re-apply ---
+bedrock_agent_alias_id = "TSTALIASID"
+
+create_vpc = false
+
+# Optional: customer-specific connector host keys (if apply host cannot ssh-keyscan)
+# Set on transfer_family module via fork or future tfvars — see docs/DEMO.md

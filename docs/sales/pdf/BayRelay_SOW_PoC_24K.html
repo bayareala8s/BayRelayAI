@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>SOW_POC_24K</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1
+id="statement-of-work-bayrelay-proof-of-concept-customer-aws">Statement
+of Work — BayRelay Proof of Concept (Customer AWS)</h1>
+<p><strong>Template for BayAreaLa8s engagements.</strong> Use for
+evaluation before Production Launch. Customize bracketed fields before
+signature.</p>
+<p><strong>Related:</strong> <a
+href="SOW_PRODUCTION_LAUNCH_42K.md">SOW_PRODUCTION_LAUNCH_42K.md</a> —
+full production scope.</p>
+<hr />
+<h2 id="parties">Parties</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr>
+<td><strong>Provider</strong></td>
+<td>BayAreaLa8s (“Provider”) — <a
+href="mailto:himanshu.bhadra@bayareala8s.com">himanshu.bhadra@bayareala8s.com</a>,
++1 925-758-1117</td>
+</tr>
+<tr>
+<td><strong>Customer</strong></td>
+<td>[Customer legal name] (“Customer”)</td>
+</tr>
+<tr>
+<td><strong>Effective date</strong></td>
+<td>[Date]</td>
+</tr>
+<tr>
+<td><strong>PoC end date</strong></td>
+<td><strong>[90]</strong> calendar days after Handoff Acceptance
+(Section 7)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="purpose">1. Purpose</h2>
+<p>Provider will deploy <strong>BayRelay</strong> in <strong>Customer’s
+AWS account</strong> for a <strong>time-boxed proof of concept</strong>
+to validate technical fit, security posture, and business workflows.
+This PoC is not a production go-live unless Customer executes a separate
+Production Launch SOW or Change Order.</p>
+<p>Customer retains AWS account ownership and pays AWS directly.</p>
+<hr />
+<h2 id="scope-of-work-poc">2. Scope of work — PoC</h2>
+<h3 id="included-deliverables">2.1 Included deliverables</h3>
+<table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 35%" />
+<col style="width: 56%" />
+</colgroup>
+<thead>
+<tr>
+<th>#</th>
+<th>Deliverable</th>
+<th>Acceptance criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Infrastructure deployment</strong></td>
+<td>Terraform apply: API (JWT + WAF), Lambda, Step Functions, DynamoDB,
+S3, KMS, CloudWatch alarms</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Transfer Family (Phase 2)</strong></td>
+<td>SFTP server + <strong>one (1)</strong> same-account / demo connector
+(not external partner production cutover)</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Knowledge base (Phase 3)</strong></td>
+<td>Bedrock KB + ingest of up to <strong>[10]</strong> sample documents
+(Provider sample + Customer-supplied)</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Bedrock agent</strong></td>
+<td>Agent deployed and Prepared; <strong>draft alias
+(<code>TSTALIASID</code>) acceptable</strong> for PoC</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Cognito operators</strong></td>
+<td>Up to <strong>[2]</strong> operator accounts</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Automated smoke test</strong></td>
+<td>Provider runs smoke script; <strong>exit code 0</strong> on S3→S3
+and enabled Phase 2/3 paths</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>PoC handoff</strong></td>
+<td>Written outputs + <strong>1-hour</strong> remote walkthrough</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Hypercare</strong></td>
+<td><strong>14 calendar days</strong>, up to <strong>4 hours</strong>
+email support</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Teardown planning</strong></td>
+<td>Written steps for <code>demo_stop.sh</code> or stack retention
+decision</td>
+</tr>
+</tbody>
+</table>
+<h3 id="poc-limitations-not-in-scope">2.2 PoC limitations (not in
+scope)</h3>
+<ul>
+<li>Published Bedrock production alias (Production Launch SOW)</li>
+<li>External partner SFTP production connectors (Change Order or
+Production Launch)</li>
+<li>More than <strong>one (1)</strong> connector or custom VPC
+networking</li>
+<li>More than <strong>10</strong> KB documents</li>
+<li>24/7 support, SLA, or compliance attestations</li>
+<li>Production change-management or runbook ownership transfer beyond
+PoC handoff</li>
+<li><strong>AWS charges</strong> (Customer responsibility; see Section
+6)</li>
+</ul>
+<h3 id="optional-at-poc-end-mutually-agreed-in-writing">2.3 Optional at
+PoC end (mutually agreed in writing)</h3>
+<table>
+<colgroup>
+<col style="width: 38%" />
+<col style="width: 61%" />
+</colgroup>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A. Teardown</strong></td>
+<td>Provider runs destroy in Customer account (empty S3 +
+<code>terraform destroy</code>); included in PoC fee</td>
+</tr>
+<tr>
+<td><strong>B. Retain stack</strong></td>
+<td>Customer keeps resources; must accept ongoing AWS cost; upgrade via
+Production Launch</td>
+</tr>
+<tr>
+<td><strong>C. Upgrade</strong></td>
+<td>Apply <strong>$8,000 credit</strong> toward Production Launch if
+signed within <strong>60 days</strong> of PoC acceptance</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="customer-responsibilities">3. Customer responsibilities</h2>
+<p>Same as Production Launch SOW (access, Bedrock model enablement,
+state bucket, POC contact, security review for
+<strong>non-production</strong> account recommended).</p>
+<p><strong>Strongly recommended:</strong> Dedicated <strong>PoC AWS
+account</strong> or sandbox OU—not shared production.</p>
+<hr />
+<h2 id="assumptions">4. Assumptions</h2>
+<ul>
+<li>Deployment region: <strong>[us-west-2]</strong> (or as agreed).</li>
+<li>PoC duration: <strong>90 days</strong> from Handoff Acceptance
+unless extended by Change Order.</li>
+<li>Customer understands <strong>Transfer Family and OpenSearch</strong>
+incur hourly/OCU charges while stack is up.</li>
+<li>Teardown Option A scheduled within <strong>5 business days</strong>
+after PoC end date unless Upgrade signed.</li>
+</ul>
+<hr />
+<h2 id="timeline">5. Timeline</h2>
+<table>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Target (business days from kickoff)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kickoff + access</td>
+<td>Day 0</td>
+</tr>
+<tr>
+<td>Deploy + bootstrap</td>
+<td>Day 5–10</td>
+</tr>
+<tr>
+<td>Smoke pass + handoff</td>
+<td>Day 8–12</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="fees-and-payment">6. Fees and payment</h2>
+<table>
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 72%" />
+</colgroup>
+<thead>
+<tr>
+<th>Item</th>
+<th>Amount (USD)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PoC (fixed)</strong></td>
+<td><strong>$24,000</strong></td>
+</tr>
+<tr>
+<td><strong>Estimated Customer AWS (PoC window)</strong></td>
+<td><strong>$1,500–$4,000</strong> total if stack runs full 90 days with
+SFTP + KB (non-binding estimate)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Payment schedule — PoC:</strong></p>
+<ul>
+<li><strong>100% ($24,000)</strong> due upon SOW signature,
+<strong>or</strong></li>
+<li><strong>50% ($12,000)</strong> at signature + <strong>50%
+($12,000)</strong> at Handoff Acceptance (Customer choice; select on
+Order Form)</li>
+</ul>
+<p><strong>Upgrade credit:</strong> If Customer signs Production Launch
+within <strong>60 days</strong> of PoC acceptance,
+<strong>$8,000</strong> credit applied to the $42,000 Production fee →
+<strong>$34,000</strong> due for Production (one-time; not combinable
+with other discounts).</p>
+<hr />
+<h2 id="acceptance">7. Acceptance</h2>
+<p><strong>PoC Handoff Acceptance</strong> when smoke test passes and
+handoff package + session delivered. Customer has <strong>3 business
+days</strong> to report material non-conformance.</p>
+<hr />
+<h2 id="change-orders-poc">8. Change orders (PoC)</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr>
+<th>Change</th>
+<th>Indicative fee</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Extend PoC 30 days (support only, no redeploy)</td>
+<td>$2,500</td>
+</tr>
+<tr>
+<td>External partner connector (one)</td>
+<td>$5,000</td>
+</tr>
+<tr>
+<td>Skip teardown; convert in-place to Production</td>
+<td>Credit per Section 6 + Production SOW delta</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="legal">9–12. Legal</h2>
+<p>Intellectual property, confidentiality, and limitation of liability:
+<strong>same as</strong> <a
+href="SOW_PRODUCTION_LAUNCH_42K.md">SOW_PRODUCTION_LAUNCH_42K.md</a>
+Sections 9–11 (incorporated by reference).</p>
+<hr />
+<h2 id="signatures">Signatures</h2>
+<table>
+<thead>
+<tr>
+<th>Provider — BayAreaLa8s</th>
+<th>Customer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name: ___________________</td>
+<td>Name: ___________________</td>
+</tr>
+<tr>
+<td>Title: __________________</td>
+<td>Title: __________________</td>
+</tr>
+<tr>
+<td>Date: ___________________</td>
+<td>Date: ___________________</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="order-form-summary">Order Form summary</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>SKU</th>
+<th>Fee</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BayRelay PoC — Customer AWS</td>
+<td><strong>$24,000</strong></td>
+</tr>
+<tr>
+<td>BayRelay Production Launch (after PoC)</td>
+<td><strong>$34,000</strong> with upgrade credit, else
+<strong>$42,000</strong></td>
+</tr>
+<tr>
+<td>Optional Care (post-production only)</td>
+<td><strong>$3,500/mo</strong>, 6-month min</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Teardown at PoC end:</strong> ☐ Option A (included) ☐ Option
+B (retain) ☐ Option C (upgrade)</p>
+</body>
+</html>
