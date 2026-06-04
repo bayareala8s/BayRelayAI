@@ -24,6 +24,12 @@ Attach or link these assets for prospects and PoC buyers.
 - Catalog: [DEMO_CATALOG.md](../DEMO_CATALOG.md)
 - Prep: `./scripts/prepare_customer_demo.sh`
 
+## Screenshots & video
+
+- Shot list: [SCREENSHOT_CHECKLIST.md](SCREENSHOT_CHECKLIST.md)
+- Save PNGs: `docs/sales/screenshots/` (`bayrelay-01-landing.png`, …)
+- Save MP4s: `docs/sales/video/` (hero reel, PoC walkthrough, clips)
+
 ## Technical leave-behinds
 
 | Asset | Path |

@@ -28,5 +28,10 @@ environments/demo.env
 environments/.bayrelay-demo-state
 connector_host_key.auto.tfvars
 customer-handoff-*.txt
+docs/sales/screenshots/*.png
+docs/sales/screenshots/*.jpg
+docs/sales/video/*.mp4
+docs/sales/video/*.mov
+docs/sales/video/*.gif
 portal/node_modules/
 portal/tsconfig.tsbuildinfo

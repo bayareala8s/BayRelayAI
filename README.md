@@ -54,6 +54,7 @@ Production checklist: [docs/PRODUCTION.md](docs/PRODUCTION.md) · **Customer AWS
 |-------|-----|
 | **Pricing** (PoC + Production) | [docs/PRICING.md](docs/PRICING.md) |
 | **Demo kit index** | [docs/sales/CUSTOMER_DEMO_KIT.md](docs/sales/CUSTOMER_DEMO_KIT.md) |
+| **Screenshot / video checklist** | [docs/sales/SCREENSHOT_CHECKLIST.md](docs/sales/SCREENSHOT_CHECKLIST.md) |
 | **One-pager + outreach** | [docs/sales/](docs/sales/) — proposal PDF, email template |
 | SOW — PoC $24k | [docs/SOW_POC_24K.md](docs/SOW_POC_24K.md) |
 | SOW — Production $42k | [docs/SOW_PRODUCTION_LAUNCH_42K.md](docs/SOW_PRODUCTION_LAUNCH_42K.md) |
