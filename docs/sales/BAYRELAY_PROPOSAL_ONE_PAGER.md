@@ -26,9 +26,11 @@
 ## What BayRelay includes
 
 - REST API with **JWT + WAF** (Cognito operators)
+- **Operator portal** — public landing page, operations dashboard, transfers, automation rules, partner registry, audit log, and Bedrock assistant
 - Transfer patterns: **S3↔S3**, **S3↔SFTP**, **SFTP↔S3**, **SFTP↔SFTP**
 - **AWS Transfer Family** (inbound SFTP + connector)
 - **Amazon Bedrock** agent + **knowledge base** (your policies and runbooks)
+- Self-service **partner onboarding** workflow (operator approve)
 - **Terraform** infrastructure as code in your account
 - Automated smoke test and written handoff
 

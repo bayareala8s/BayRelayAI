@@ -19,9 +19,9 @@ Complete list of demos you can show customers, mapped to **PoC ($24k)** and **Pr
 | **Trace header** | Off in prod config (`allow_agent_trace_header = false`) | Do not demo client traces in prod story |
 | **Teardown story** | Optional `demo_stop.sh` at PoC end | Stack retained; SNS alarms subscribed |
 | **Duration** | 45–75 min live + optional 15 min architecture | 60–90 min live + 30 min ops/console deep-dive |
-| **Operator UI** | API + curl + FileZilla (no product UI) | Same, or **Portal MVP** add-on ($22k) |
+| **Operator UI** | **Operator portal** (landing, ops dashboard, API-backed) | Portal v2 + production hardening |
 
-**No built-in web UI today.** Optional change order: [OPERATOR_PORTAL_MVP.md](OPERATOR_PORTAL_MVP.md) · [SOW_OPERATOR_PORTAL_ADDON.md](SOW_OPERATOR_PORTAL_ADDON.md).
+**Operator portal** is included in the reference stack: public landing (`/`), Cognito sign-in, operations dashboard, transfers, automation, onboarding, partners, policies, audit. See [OPERATOR_PORTAL_V2.md](OPERATOR_PORTAL_V2.md). Historical add-on SOW: [SOW_OPERATOR_PORTAL_ADDON.md](SOW_OPERATOR_PORTAL_ADDON.md).
 
 ## Demo map (all capabilities)
 
@@ -49,7 +49,7 @@ Complete list of demos you can show customers, mapped to **PoC ($24k)** and **Pr
 | T | External partner SFTP | Integration | ✗ (CO) | ✓ if in SOW | — |
 | U | Failure / retry story | Ops | Optional | ✓ | — |
 | V | `demo_stop` teardown | Cost | PoC only | ✗ | — |
-| W | **Operator portal** (add-on) | UI | — | ✓ CO | E2E in portal SOW |
+| W | **Operator portal** (landing + v2) | UI | ✓ | ✓ | [CUSTOMER_DEMO_READY.md](CUSTOMER_DEMO_READY.md) |
 
 ---
 

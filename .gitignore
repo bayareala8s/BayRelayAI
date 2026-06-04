@@ -25,5 +25,8 @@ build/
 .env.*
 portal/.env.production
 environments/demo.env
+environments/.bayrelay-demo-state
+connector_host_key.auto.tfvars
 customer-handoff-*.txt
 portal/node_modules/
+portal/tsconfig.tsbuildinfo

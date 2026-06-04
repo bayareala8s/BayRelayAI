@@ -1,6 +1,8 @@
 # BayRelay — Agentic AI File Transfer Platform (AWS)
 
-Production reference implementation: Bedrock agent + RAG knowledge base + Step Functions file transfer (S3 + SFTP).
+**Repository:** [github.com/bayareala8s/BayRelayAI](https://github.com/bayareala8s/BayRelayAI)
+
+Production reference implementation: Bedrock agent + RAG knowledge base + Step Functions file transfer (S3 + SFTP), with an operator portal (landing page, operations dashboard, automation, onboarding).
 
 ## Demo lifecycle (start → run → stop)
 
@@ -19,11 +21,11 @@ Production reference implementation: Bedrock agent + RAG knowledge base + Step F
 cp environments/demo.env.example environments/demo.env   # edit Cognito password
 ./scripts/bayrelay_demo.sh start --yes --smoke             # deploy + validate (~20–30 min first time)
 ./scripts/bayrelay_demo.sh status                          # before customer call
-./scripts/production_ready.sh --smoke                    # production gate (recommended)
+./scripts/production_ready.sh --smoke                      # production gate (recommended)
 ./scripts/bayrelay_demo.sh stop --yes                      # when done (saves AWS cost)
+```
 
 **Customer demo cheat sheet:** [docs/CUSTOMER_DEMO_READY.md](docs/CUSTOMER_DEMO_READY.md)
-```
 
 Full guide: **[docs/DEMO_LIFECYCLE.md](docs/DEMO_LIFECYCLE.md)** · Demo catalog: **[docs/DEMO_CATALOG.md](docs/DEMO_CATALOG.md)**
 
@@ -32,7 +34,8 @@ Full guide: **[docs/DEMO_LIFECYCLE.md](docs/DEMO_LIFECYCLE.md)** · Demo catalog
 - `environments/` — production Terraform stack (`environment = "prod"`, region `us-west-2`)
 - `modules/` — Terraform modules
 - `app/lambdas/unified/` — API, workflow, agent_tools handlers
-- `docs/` — architecture, deployment, demo
+- `portal/` — React operator portal (Vite SPA)
+- `docs/` — architecture, deployment, demo, sales
 - `scripts/` — demo start/stop, bootstrap, smoke tests
 - `tests/` — unit tests
 
@@ -50,6 +53,7 @@ Production checklist: [docs/PRODUCTION.md](docs/PRODUCTION.md) · **Customer AWS
 | Asset | Doc |
 |-------|-----|
 | **Pricing** (PoC + Production) | [docs/PRICING.md](docs/PRICING.md) |
+| **Demo kit index** | [docs/sales/CUSTOMER_DEMO_KIT.md](docs/sales/CUSTOMER_DEMO_KIT.md) |
 | **One-pager + outreach** | [docs/sales/](docs/sales/) — proposal PDF, email template |
 | SOW — PoC $24k | [docs/SOW_POC_24K.md](docs/SOW_POC_24K.md) |
 | SOW — Production $42k | [docs/SOW_PRODUCTION_LAUNCH_42K.md](docs/SOW_PRODUCTION_LAUNCH_42K.md) |
