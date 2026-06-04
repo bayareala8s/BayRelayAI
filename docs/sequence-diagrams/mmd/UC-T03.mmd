@@ -1,3 +1,6 @@
+---
+title: UC-T03 | SFTP to S3 Transfer
+---
 sequenceDiagram
   autonumber
   participant Child as SFN sftp-to-s3
@@ -5,6 +8,7 @@ sequenceDiagram
   participant TF as Transfer connector
   participant S3 as Amazon S3
   participant DDB as DynamoDB
+  Note over Child,DDB: Use case: Retrieve files from partner SFTP via connector into the BayRelay transfer bucket on S3.
 
   Child->>WF: sftp_retrieve_to_s3
   WF->>TF: start_file_transfer(RetrieveFilePaths, LocalDirectoryPath=/bucket/prefix)

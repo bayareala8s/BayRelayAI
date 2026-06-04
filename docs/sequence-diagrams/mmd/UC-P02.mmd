@@ -1,3 +1,6 @@
+---
+title: UC-P02 | Partner Portal Sign-In (Scoped API)
+---
 sequenceDiagram
   autonumber
   participant P as Partner browser
@@ -5,6 +8,7 @@ sequenceDiagram
   participant APIGW as API Gateway
   participant API as Lambda api
   participant DDB as DynamoDB
+  Note over P,DDB: Use case: Partner user signs in and sees only transfers and data scoped to their partner_id claim.
 
   P->>Cognito: Sign in (custom:partner_id set)
   P->>APIGW: GET /v1/transfers?limit=10

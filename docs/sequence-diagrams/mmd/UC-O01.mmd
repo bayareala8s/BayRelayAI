@@ -1,9 +1,13 @@
+---
+title: UC-O01 | Partner Submits Onboarding Request
+---
 sequenceDiagram
   autonumber
   participant P as Partner (portal /onboarding/new)
   participant APIGW as API Gateway
   participant API as Lambda api
   participant DDB as DynamoDB
+  Note over P,DDB: Use case: Prospect or partner submits a self-service onboarding request stored as SUBMITTED in DynamoDB.
 
   P->>APIGW: POST /v1/onboarding/requests
   Note over APIGW: JWT partner or operator, or public if flag enabled

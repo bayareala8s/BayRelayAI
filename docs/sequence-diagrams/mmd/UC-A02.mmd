@@ -1,9 +1,13 @@
+---
+title: UC-A02 | Automation Chain S3 to SFTP then SFTP to S3
+---
 sequenceDiagram
   autonumber
   participant S3 as Transfer bucket
   participant EB as EventBridge
   participant Disp as transfer_dispatcher
   participant SFN as Step Functions
+  Note over S3,SFN: Use case: Two chained rules: outbound S3 to SFTP staging, then staging object triggers SFTP to S3 delivery.
 
   Note over S3: Rule 1: inbound/sftp/* → S3_TO_SFTP
   S3->>EB: Object Created (inbound file)

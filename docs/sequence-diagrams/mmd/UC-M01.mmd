@@ -1,8 +1,12 @@
+---
+title: UC-M01 | Audit Trail and List Audit Events
+---
 sequenceDiagram
   autonumber
   participant Op as Operator
   participant API as Lambda api
   participant DDB as DynamoDB
+  Note over Op,DDB: Use case: Operator queries filtered audit events for transfers, onboarding, automation, and inbound activity.
 
   Note over DDB: Audits: transfer_submitted, onboarding_*, automation, sftp_inbound, cancel
   Op->>API: GET /v1/audit-events?q=&correlation_id=

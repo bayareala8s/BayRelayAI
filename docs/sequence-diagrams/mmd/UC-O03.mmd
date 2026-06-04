@@ -1,8 +1,12 @@
+---
+title: UC-O03 | Onboarding Auto-Approve (Demo)
+---
 sequenceDiagram
   autonumber
   participant P as Applicant
   participant API as Lambda api
   participant DDB as DynamoDB
+  Note over P,DDB: Use case: Demo mode auto-approves onboarding immediately after submit for hands-on environments.
 
   P->>API: POST /v1/onboarding/requests
   API->>DDB: SUBMITTED

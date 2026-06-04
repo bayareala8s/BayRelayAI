@@ -1,9 +1,13 @@
+---
+title: UC-T01 | S3 to S3 Transfer
+---
 sequenceDiagram
   autonumber
   participant Child as SFN s3-to-s3
   participant WF as Lambda workflow
   participant S3 as Amazon S3
   participant DDB as DynamoDB
+  Note over Child,DDB: Use case: Verify source object in S3, copy to destination key, and mark execution succeeded.
 
   Note over Child: Input payload: source_bucket/key, dest_bucket/key
   Child->>WF: s3_verify_source

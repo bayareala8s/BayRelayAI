@@ -1,8 +1,12 @@
+---
+title: UC-M02 | Ops Summary Dashboard Data
+---
 sequenceDiagram
   autonumber
   participant Portal as Portal
   participant API as ops_service
   participant DDB as DynamoDB
+  Note over Portal,DDB: Use case: API aggregates partner, endpoint, transfer, execution, and onboarding counts for dashboard widgets.
 
   Portal->>API: GET /v1/ops/summary
   API->>DDB: Count partners, endpoints

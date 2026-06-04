@@ -1,3 +1,6 @@
+---
+title: UC-G03 | Knowledge Base Sync and Ingestion
+---
 sequenceDiagram
   autonumber
   participant Eng as Engineer / CI
@@ -5,6 +8,7 @@ sequenceDiagram
   participant S3 as KB source bucket
   participant KB as Bedrock KB
   participant BR as Bedrock Agent
+  Note over Eng,BR: Use case: Engineer syncs KB markdown to S3, runs ingestion job, and prepares agent alias for queries.
 
   Eng->>Script: bootstrap_phase3.sh
   Script->>S3: Sync docs/kb/*.md

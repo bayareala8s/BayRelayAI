@@ -1,9 +1,13 @@
+---
+title: UC-PO02 | Operator Creates Transfer Rule
+---
 sequenceDiagram
   autonumber
   participant Op as Operator
   participant Portal as Portal
   participant API as Lambda api
   participant DDB as DynamoDB
+  Note over Op,DDB: Use case: Operator defines an EventBridge-backed automation rule with match pattern and payload template.
 
   Op->>Portal: /rules → Create rule form
   Portal->>API: POST /v1/transfer-rules

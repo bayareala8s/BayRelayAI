@@ -1,3 +1,6 @@
+---
+title: UC-G02 | KB-Grounded Policy Answer
+---
 sequenceDiagram
   autonumber
   participant Op as Operator
@@ -5,6 +8,7 @@ sequenceDiagram
   participant BR as Bedrock Agent
   participant KB as Bedrock Knowledge Base
   participant AOSS as OpenSearch Serverless
+  Note over Op,AOSS: Use case: Agent retrieves knowledge-base chunks from OpenSearch and returns a grounded policy or runbook answer.
 
   Op->>API: POST /v1/agent/query (policy / retry question)
   API->>BR: InvokeAgent

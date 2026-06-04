@@ -1,3 +1,6 @@
+---
+title: UC-T02 | S3 to SFTP Transfer
+---
 sequenceDiagram
   autonumber
   participant Child as SFN s3-to-sftp
@@ -5,6 +8,7 @@ sequenceDiagram
   participant S3 as Amazon S3
   participant TF as Transfer connector API
   participant DDB as DynamoDB
+  Note over Child,DDB: Use case: Stage file in S3 then SendFilePaths via Transfer Family connector to partner SFTP.
 
   Child->>WF: s3_verify_source
   WF->>S3: HeadObject

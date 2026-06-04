@@ -1,9 +1,13 @@
+---
+title: UC-T04 | SFTP to SFTP Relay Transfer
+---
 sequenceDiagram
   autonumber
   participant Child as SFN sftp-to-sftp
   participant WF as Lambda workflow
   participant TF as Transfer connector
   participant S3 as Amazon S3
+  Note over Child,S3: Use case: Retrieve from remote source to S3 staging, then send from staging to remote destination on same connector.
 
   Child->>WF: sftp_relay
   WF->>TF: Retrieve remote_source_paths → S3 sftp-staging/{execution_id}

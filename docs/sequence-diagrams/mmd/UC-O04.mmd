@@ -1,8 +1,12 @@
+---
+title: UC-O04 | Operator Rejects Onboarding
+---
 sequenceDiagram
   autonumber
   participant Op as Operator
   participant API as Lambda api
   participant DDB as DynamoDB
+  Note over Op,DDB: Use case: Operator rejects onboarding with a reason and audit event, no partner provisioned.
 
   Op->>API: POST /v1/onboarding/requests/{id}/reject {reason}
   API->>DDB: status REJECTED, rejection_reason

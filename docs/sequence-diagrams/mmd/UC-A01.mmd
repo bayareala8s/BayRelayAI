@@ -1,3 +1,6 @@
+---
+title: UC-A01 | Automation S3 to S3 on Object Created
+---
 sequenceDiagram
   autonumber
   participant Uploader as Operator / system / SFTP→S3
@@ -7,6 +10,7 @@ sequenceDiagram
   participant Rules as transfer_rules_service
   participant API as transfers_service
   participant SFN as Step Functions
+  Note over Uploader,SFN: Use case: S3 Object Created event matches a transfer rule and auto-submits an S3 to S3 transfer.
 
   Uploader->>S3: PutObject demo/.../inbound/file.csv
   S3->>EB: Object Created

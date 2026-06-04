@@ -1,3 +1,6 @@
+---
+title: UC-T00 | Manual Transfer Submit (Common Path)
+---
 sequenceDiagram
   autonumber
   participant Client as Portal / API / Agent tools
@@ -8,6 +11,7 @@ sequenceDiagram
   participant WF as Lambda workflow
   participant Child as Child SFN (type-specific)
   participant EB as EventBridge
+  Note over Client,EB: Use case: Client submits a transfer with idempotency, precheck runs, then the type-specific child Step Functions workflow executes.
 
   Client->>APIGW: POST /v1/transfers + Idempotency-Key
   APIGW->>API: JWT + body

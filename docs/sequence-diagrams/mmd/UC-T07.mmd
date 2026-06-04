@@ -1,8 +1,12 @@
+---
+title: UC-T07 | Cancel In-Flight Transfer
+---
 sequenceDiagram
   autonumber
   participant Op as Operator / Partner
   participant API as Lambda api
   participant DDB as DynamoDB
+  Note over Op,DDB: Use case: Operator or partner marks an active transfer request CANCELLED in DynamoDB (status marker, SFN may still run).
 
   Op->>API: POST /v1/transfers/{request_id}/cancel
   API->>DDB: Get request

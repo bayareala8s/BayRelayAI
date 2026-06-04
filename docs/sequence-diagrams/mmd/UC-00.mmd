@@ -1,3 +1,6 @@
+---
+title: UC-00 | Customer Journey Overview
+---
 sequenceDiagram
   autonumber
   participant Prospect as Prospect / Partner user
@@ -7,6 +10,7 @@ sequenceDiagram
   participant SFN as Step Functions
   participant S3 as Transfer bucket
   participant SFTP as Transfer Family
+  Note over Prospect,SFTP: Use case: End-to-end path for a new trading partner from landing and onboarding through first transfer and status tracking.
 
   Prospect->>Portal: Visit landing / Apply as partner
   Prospect->>API: POST /v1/onboarding/requests

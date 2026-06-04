@@ -1,9 +1,13 @@
+---
+title: UC-T06 | Retry Failed Transfer
+---
 sequenceDiagram
   autonumber
   participant Op as Operator portal
   participant API as Lambda api
   participant DDB as DynamoDB
   participant SFN as Step Functions
+  Note over Op,SFN: Use case: Operator retries a failed transfer by submitting a new request copied from the original payload.
 
   Op->>API: POST /v1/transfers/{request_id}/retry
   API->>DDB: Load original request

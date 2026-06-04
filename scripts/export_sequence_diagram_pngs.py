@@ -12,6 +12,13 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+SCRIPTS = ROOT / "scripts"
+if str(SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS))
+
+from diagram_catalog import DIAGRAM_CATALOG  # noqa: E402
+from mermaid_diagram_decorate import decorate_mermaid  # noqa: E402
+
 SOURCE = ROOT / "docs" / "SEQUENCE_DIAGRAMS.md"
 OUT_DIR = ROOT / "docs" / "sequence-diagrams" / "png"
 MMD_DIR = ROOT / "docs" / "sequence-diagrams" / "mmd"
@@ -120,6 +127,8 @@ def main() -> int:
         stem = f"{uc_id}{suffix}"
         mmd_path = MMD_DIR / f"{stem}.mmd"
         png_path = OUT_DIR / f"{stem}.png"
+        if uc_id in DIAGRAM_CATALOG:
+            mermaid = decorate_mermaid(uc_id, mermaid)
         mmd_path.write_text(mermaid + "\n", encoding="utf-8")
 
         try:

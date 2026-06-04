@@ -1,3 +1,6 @@
+---
+title: UC-A04 | Partner SFTP Inbound with S3 to S3 Automation
+---
 sequenceDiagram
   autonumber
   participant Partner as Partner (FileZilla)
@@ -6,6 +9,7 @@ sequenceDiagram
   participant Audit as Lambda sftp_inbound
   participant EB as EventBridge
   participant Disp as transfer_dispatcher
+  Note over Partner,Disp: Use case: Partner uploads to managed SFTP server, file lands in sftp-inbound/, S3 to S3 rule processes it.
 
   Partner->>SFTP: Upload file
   SFTP->>S3: Logical mapping → sftp-inbound/...

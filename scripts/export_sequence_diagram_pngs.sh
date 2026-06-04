@@ -30,4 +30,5 @@ if [[ -x "$MMDC" ]]; then
   done
 fi
 
+python3 "$ROOT/scripts/mermaid_diagram_decorate.py"
 exec python3 "$ROOT/scripts/export_sequence_diagram_pngs.py"

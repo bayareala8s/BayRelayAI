@@ -1,8 +1,12 @@
+---
+title: UC-T05 | Idempotent Transfer Resubmit
+---
 sequenceDiagram
   autonumber
   participant Client as API client
   participant API as Lambda api
   participant DDB as DynamoDB
+  Note over Client,DDB: Use case: Duplicate POST with the same Idempotency-Key returns the original request without starting a new workflow.
 
   Client->>API: POST /v1/transfers (same X-Idempotency-Key)
   API->>DDB: Get idempotency_keys

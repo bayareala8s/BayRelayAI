@@ -1,9 +1,13 @@
+---
+title: UC-C01 | Register Partner and Endpoints
+---
 sequenceDiagram
   autonumber
   participant Op as Operator (portal or API)
   participant APIGW as API Gateway
   participant API as Lambda api
   participant DDB as DynamoDB
+  Note over Op,DDB: Use case: Operator registers a trading partner and one or more protocol endpoints in the control plane.
 
   Op->>APIGW: POST /v1/partners {name}
   APIGW->>API: require_operator

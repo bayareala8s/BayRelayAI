@@ -1,3 +1,6 @@
+---
+title: UC-G01 | Bedrock Agent Query with Tools
+---
 sequenceDiagram
   autonumber
   participant Op as Operator portal
@@ -6,6 +9,7 @@ sequenceDiagram
   participant BR as Bedrock Agent
   participant Tools as Lambda agent_tools
   participant DDB as DynamoDB
+  Note over Op,DDB: Use case: Operator asks the Bedrock agent which invokes action-group tools against live platform data.
 
   Op->>APIGW: POST /v1/agent/query {query, session_id}
   APIGW->>API: InvokeAgent

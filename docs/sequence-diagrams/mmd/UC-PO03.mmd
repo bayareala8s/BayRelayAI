@@ -1,9 +1,13 @@
+---
+title: UC-PO03 | Portal Partner and Endpoint CRUD
+---
 sequenceDiagram
   autonumber
   participant Op as Operator
   participant Portal as Portal
   participant API as Lambda api
   participant DDB as DynamoDB
+  Note over Op,DDB: Use case: Operator searches partners, updates records, and soft-disables endpoints from the portal.
 
   Op->>Portal: /partners search + Edit
   Portal->>API: PUT /v1/partners/{id}

@@ -1,6 +1,10 @@
+---
+title: UC-P03 | Unauthenticated API Rejected
+---
 sequenceDiagram
   participant Client as Client (curl / script)
   participant APIGW as API Gateway
+  Note over Client,APIGW: Use case: API Gateway rejects control-plane calls that omit a valid Authorization JWT.
 
   Client->>APIGW: POST /v1/partners (no Authorization)
   APIGW-->>Client: 401 Unauthorized

@@ -1,3 +1,6 @@
+---
+title: UC-P01 | Operator Portal Sign-In
+---
 sequenceDiagram
   autonumber
   participant Op as Operator browser
@@ -5,6 +8,7 @@ sequenceDiagram
   participant Cognito as Amazon Cognito
   participant APIGW as API Gateway (JWT)
   participant API as Lambda api
+  Note over Op,API: Use case: Operator authenticates with Cognito and accesses the BayRelay operations portal with a validated JWT.
 
   Op->>Portal: Open /login
   Op->>Cognito: InitiateAuth (USER_PASSWORD_AUTH)

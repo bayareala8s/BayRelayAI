@@ -1,3 +1,6 @@
+---
+title: UC-S01 | Partner Upload via Managed SFTP Server
+---
 sequenceDiagram
   autonumber
   participant Partner as Partner SFTP client
@@ -5,6 +8,7 @@ sequenceDiagram
   participant S3 as S3 (logical home)
   participant EB as EventBridge
   participant Audit as sftp_inbound Lambda
+  Note over Partner,Audit: Use case: Partner uploads via Transfer Family SFTP server, file maps to sftp-inbound/ prefix and audit fires.
 
   Partner->>Srv: SFTP PUT /file.dat
   Srv->>S3: Object sftp-inbound/.../file.dat

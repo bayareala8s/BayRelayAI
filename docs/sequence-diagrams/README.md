@@ -5,6 +5,8 @@
 | [`png/`](png/) | 31 PNG exports (one per use case in [SEQUENCE_DIAGRAMS.md](../SEQUENCE_DIAGRAMS.md)) |
 | [`mmd/`](mmd/) | Mermaid source extracted for local rendering |
 
+Each PNG includes a **title** (Mermaid frontmatter) and an in-diagram **Use case** note. Titles and copy live in `scripts/diagram_catalog.py`.
+
 ## Regenerate
 
 ```bash

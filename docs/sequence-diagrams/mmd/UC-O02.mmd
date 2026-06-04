@@ -1,9 +1,13 @@
+---
+title: UC-O02 | Operator Approves Onboarding
+---
 sequenceDiagram
   autonumber
   participant Op as Operator
   participant API as Lambda api
   participant DDB as DynamoDB
   participant Cognito as Cognito
+  Note over Op,Cognito: Use case: Operator approves request, provisions partner and endpoints, and links Cognito partner user if applicable.
 
   Op->>API: POST /v1/onboarding/requests/{id}/approve
   API->>DDB: Create partner + endpoints

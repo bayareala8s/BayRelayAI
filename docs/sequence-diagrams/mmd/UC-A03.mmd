@@ -1,9 +1,13 @@
+---
+title: UC-A03 | Automation SFTP to SFTP on Connector Staging
+---
 sequenceDiagram
   autonumber
   participant S3 as Transfer bucket
   participant EB as EventBridge
   participant Disp as transfer_dispatcher
   participant SFN as Step Functions
+  Note over S3,SFN: Use case: Connector staging key under sftp-connector/flat-send-* triggers SFTP to SFTP relay workflow.
 
   S3->>EB: Object Created sftp-connector/flat-send-*
   EB->>Disp: dispatch (connector staging only for SFTP_* rules)

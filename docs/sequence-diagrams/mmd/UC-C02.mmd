@@ -1,3 +1,6 @@
+---
+title: UC-C02 | Routing Policy DENY Blocks Transfer
+---
 sequenceDiagram
   autonumber
   participant Op as Operator
@@ -5,6 +8,7 @@ sequenceDiagram
   participant DDB as DynamoDB
   participant SFN as SFN precheck
   participant WF as Lambda workflow
+  Note over Op,WF: Use case: A DENY routing policy stops a submitted transfer during precheck before child workflow runs.
 
   Op->>API: PUT /v1/routing-policies (effect=DENY)
   API->>DDB: policy default + partner_id

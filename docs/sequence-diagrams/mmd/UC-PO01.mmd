@@ -1,3 +1,6 @@
+---
+title: UC-PO01 | Operator Operations Dashboard
+---
 sequenceDiagram
   autonumber
   participant Op as Operator browser
@@ -5,6 +8,7 @@ sequenceDiagram
   participant APIGW as API Gateway
   participant API as Lambda api
   participant DDB as DynamoDB
+  Note over Op,DDB: Use case: Portal loads ops summary KPIs, health, recent transfers, and onboarding counts for operators.
 
   Op->>Portal: /operations
   Portal->>APIGW: GET /v1/ops/summary
