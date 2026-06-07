@@ -16,6 +16,7 @@ import PoliciesPage from "./pages/PoliciesPage";
 import AuditPage from "./pages/AuditPage";
 import PartnerHomePage from "./pages/PartnerHomePage";
 import LandingPage from "./pages/LandingPage";
+import HelpPage from "./pages/HelpPage";
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   if (!isLoggedIn()) {
@@ -56,6 +57,7 @@ export default function App() {
         <Route path="transfers/:id" element={<TransferDetailPage />} />
         <Route path="transfers/new" element={<NewTransferPage />} />
         <Route path="agent" element={<AgentPage />} />
+        <Route path="help" element={<HelpPage />} />
         <Route
           path="rules"
           element={

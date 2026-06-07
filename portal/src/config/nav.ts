@@ -29,7 +29,7 @@ export const PARTNER_NAV_MAIN: NavItem[] = [
 ];
 
 export const NAV_HELP: NavItem = {
-  to: "https://www.bayareala8s.com/",
+  to: "/help",
   label: "Help",
   icon: "help",
 };
