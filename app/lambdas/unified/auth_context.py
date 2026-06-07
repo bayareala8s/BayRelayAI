@@ -29,18 +29,25 @@ class AuthContext:
 
 
 def _parse_groups(raw: Any) -> tuple[str, ...]:
+    """Normalize Cognito group claims from API Gateway JWT authorizer or IdToken."""
     if raw is None:
         return ()
+    tokens: list[str] = []
     if isinstance(raw, list):
-        return tuple(str(g) for g in raw)
-    if isinstance(raw, str):
+        for entry in raw:
+            tokens.extend(str(entry).split())
+    elif isinstance(raw, str):
         if raw.startswith("[") and raw.endswith("]"):
             inner = raw[1:-1].strip()
             if not inner:
                 return ()
-            return tuple(p.strip().strip('"') for p in inner.split(","))
-        return (raw,)
-    return (str(raw),)
+            for part in inner.split(","):
+                tokens.extend(part.strip().strip('"').split())
+        else:
+            tokens.extend(raw.split())
+    else:
+        tokens.extend(str(raw).split())
+    return tuple(g for g in tokens if g)
 
 
 def from_event(event: dict[str, Any]) -> AuthContext:

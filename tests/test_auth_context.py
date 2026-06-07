@@ -61,6 +61,27 @@ def test_operator_wins_when_in_both_groups(monkeypatch):
     assert ctx.is_operator
 
 
+def test_apigateway_space_separated_groups(monkeypatch):
+    """API Gateway JWT authorizer often passes one list item with space-separated groups."""
+    monkeypatch.setenv("ENABLE_API_JWT_AUTH", "true")
+    event = {
+        "requestContext": {
+            "authorizer": {
+                "jwt": {
+                    "claims": {
+                        "sub": "u6",
+                        "cognito:groups": ["bayrelay-operators bayrelay-partners"],
+                    }
+                }
+            }
+        }
+    }
+    ctx = auth_context.from_event(event)
+    assert ctx.is_operator
+    assert "bayrelay-operators" in ctx.groups
+    assert "bayrelay-partners" in ctx.groups
+
+
 def test_jwt_required_denies_unauthenticated(monkeypatch):
     monkeypatch.setenv("ENABLE_API_JWT_AUTH", "true")
     ctx = auth_context.from_event({})
