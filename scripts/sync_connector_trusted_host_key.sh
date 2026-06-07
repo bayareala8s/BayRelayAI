@@ -30,10 +30,17 @@ key_json = subprocess.check_output(
 )
 host_key = json.loads(key_json)["key"]
 c = boto3.client("transfer", region_name=region)
-secret = c.describe_connector(ConnectorId=connector_id)["Connector"]["SftpConfig"]["UserSecretId"]
+conn = c.describe_connector(ConnectorId=connector_id)["Connector"]
+secret = conn["SftpConfig"]["UserSecretId"]
 c.update_connector(
     ConnectorId=connector_id,
     SftpConfig={"UserSecretId": secret, "TrustedHostKeys": [host_key]},
 )
+updated = c.describe_connector(ConnectorId=connector_id)["Connector"]["SftpConfig"].get(
+    "TrustedHostKeys", []
+)
+if not updated or updated[0] != host_key:
+    print("FAIL: connector trusted host key did not persist after update", file=sys.stderr)
+    sys.exit(1)
 print(f"OK: connector {connector_id} trusted host key updated")
 PY

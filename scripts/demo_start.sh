@@ -113,8 +113,18 @@ fi
 if [[ "${SYNC_CONNECTOR_HOST_KEY:-1}" == "1" ]] && bayrelay_stack_is_up; then
   conn="$(bayrelay_tf_raw transfer_connector_id)"
   if [[ -n "$conn" && "$conn" != "null" ]]; then
-    "$BAYRELAY_ROOT/scripts/sync_connector_trusted_host_key.sh" || \
+    synced=false
+    for attempt in 1 2 3 4 5; do
+      if "$BAYRELAY_ROOT/scripts/sync_connector_trusted_host_key.sh"; then
+        synced=true
+        break
+      fi
+      echo "WARN: connector host key sync attempt $attempt failed — retrying in 15s..." >&2
+      sleep 15
+    done
+    if [[ "$synced" != true ]]; then
       echo "WARN: connector host key sync failed — S3→SFTP may fail until fixed." >&2
+    fi
   fi
 fi
 
