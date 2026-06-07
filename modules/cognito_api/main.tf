@@ -14,7 +14,7 @@ resource "aws_cognito_user_pool" "api" {
 
   schema {
     name                     = "partner_id"
-    attribute_data_type    = "String"
+    attribute_data_type      = "String"
     mutable                  = true
     required                 = false
     developer_only_attribute = false

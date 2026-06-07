@@ -67,8 +67,10 @@ acct=$(aws sts get-caller-identity --query Account --output text --region "${AWS
   echo "--- Next steps for customer ---"
   echo "1. Subscribe operations to alarm SNS topic"
   echo "2. Replace TSTALIASID with published Bedrock alias if still draft"
-  echo "3. Run: ./scripts/bayrelay_demo.sh smoke (regression)"
-  echo "4. See docs/RUNBOOK.md and docs/DEMO.md"
+  echo "3. Set api_cors_allow_origins to operator portal URL in terraform.tfvars"
+  echo "4. Confirm onboarding_auto_approve=false and enable_public_onboarding_submit=false"
+  echo "5. Run: ./scripts/production_ready.sh --smoke (regression)"
+  echo "6. See docs/RUNBOOK.md and docs/PRODUCTION_CHECKLIST.md"
   echo
   echo "--- Docs ---"
   echo "  docs/CUSTOMER_AWS_DEPLOYMENT.md"

@@ -41,3 +41,50 @@ def test_operator_from_groups():
     }
     ctx = auth_context.from_event(event)
     assert ctx.is_operator
+
+
+def test_jwt_required_denies_unauthenticated(monkeypatch):
+    monkeypatch.setenv("ENABLE_API_JWT_AUTH", "true")
+    ctx = auth_context.from_event({})
+    assert ctx.role == "public"
+    assert auth_context.require_operator(ctx) is not None
+
+
+def test_jwt_required_denies_claims_without_group(monkeypatch):
+    monkeypatch.setenv("ENABLE_API_JWT_AUTH", "true")
+    event = {
+        "requestContext": {
+            "authorizer": {
+                "jwt": {
+                    "claims": {
+                        "sub": "u3",
+                        "email": "legacy@example.com",
+                    }
+                }
+            }
+        }
+    }
+    ctx = auth_context.from_event(event)
+    assert ctx.role == "public"
+    assert auth_context.require_operator(ctx) is not None
+
+
+def test_jwt_optional_elevates_public_to_operator(monkeypatch):
+    monkeypatch.setenv("ENABLE_API_JWT_AUTH", "false")
+    ctx = auth_context.from_event({})
+    assert ctx.is_operator
+
+
+def test_jwt_optional_legacy_claims_without_group(monkeypatch):
+    monkeypatch.setenv("ENABLE_API_JWT_AUTH", "false")
+    event = {
+        "requestContext": {
+            "authorizer": {
+                "jwt": {
+                    "claims": {"sub": "u4", "email": "legacy@example.com"}
+                }
+            }
+        }
+    }
+    ctx = auth_context.from_event(event)
+    assert ctx.is_operator

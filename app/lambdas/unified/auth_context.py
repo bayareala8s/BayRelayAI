@@ -58,17 +58,18 @@ def from_event(event: dict[str, Any]) -> AuthContext:
     username = (claims.get("cognito:username") or email or "").strip()
     sub = (claims.get("sub") or "").strip()
 
+    jwt_required = os.environ.get("ENABLE_API_JWT_AUTH", "true").lower() in ("1", "true", "yes")
+
     if PARTNER_GROUP in groups:
         role = "partner"
     elif OPERATOR_GROUP in groups:
         role = "operator"
-    elif claims:
-        # Legacy demo users without groups — treat as operator.
+    elif claims and not jwt_required:
+        # Legacy demo users without groups — operator only when JWT is optional.
         role = "operator"
     else:
         role = "public"
 
-    jwt_required = os.environ.get("ENABLE_API_JWT_AUTH", "").lower() in ("1", "true", "yes")
     if not jwt_required and role == "public":
         role = "operator"
 

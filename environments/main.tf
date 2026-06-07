@@ -194,6 +194,7 @@ locals {
   transfer_connector_id = var.enable_transfer_family ? module.transfer_family[0].connector_id : ""
   sftp_server_endpoint  = var.enable_transfer_family ? module.transfer_family[0].server_endpoint : ""
   lambda_env_common = {
+    ENABLE_API_JWT_AUTH            = var.enable_api_jwt_auth ? "true" : "false"
     AWS_ACCOUNT_ID                 = data.aws_caller_identity.current.account_id
     BAYRELAY_PREFIX                = local.name_prefix
     PARTNERS_TABLE                 = module.ddb.partners_name
@@ -587,9 +588,9 @@ module "cloudfront_api" {
     aws.us_east_1 = aws.us_east_1
   }
 
-  name_prefix            = local.name_prefix
-  api_gateway_endpoint   = aws_apigatewayv2_api.http.api_endpoint
-  tags                   = local.tags
+  name_prefix          = local.name_prefix
+  api_gateway_endpoint = aws_apigatewayv2_api.http.api_endpoint
+  tags                 = local.tags
 }
 
 resource "aws_lambda_function" "transfer_dispatcher" {
@@ -737,8 +738,8 @@ resource "aws_lambda_permission" "sftp_inbound_events" {
 module "observability" {
   source = "../modules/cloudwatch"
 
-  name_prefix                 = local.name_prefix
-  alarm_subscription_emails   = var.alarm_subscription_emails
+  name_prefix               = local.name_prefix
+  alarm_subscription_emails = var.alarm_subscription_emails
   lambda_function_names = merge(
     {
       api         = aws_lambda_function.api.function_name

@@ -12,7 +12,7 @@ BayRelay uses **one operator portal** (single CloudFront URL) with **role-based 
 | Variable | Default | Purpose |
 |----------|---------|---------|
 | `enable_transfer_automation` | `true` | S3 EventBridge → `transfer_dispatcher` Lambda |
-| `onboarding_auto_approve` | `true` | Onboarding submit immediately provisions partner + endpoints |
+| `onboarding_auto_approve` | `false` | Onboarding submit immediately provisions partner + endpoints (set `true` for internal demos) |
 | `enable_public_onboarding_submit` | `false` | Unauthenticated onboarding (usually keep `false`; partners sign in) |
 | `enable_self_service_onboarding` | `true` | Onboarding API + portal wizard |
 

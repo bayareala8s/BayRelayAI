@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 import os
 from typing import Any
 
@@ -11,6 +12,7 @@ from bayrelay import errors as err
 
 _COGNITO = boto3.client("cognito-idp")
 PARTNER_GROUP = "bayrelay-partners"
+logger = logging.getLogger(__name__)
 
 
 def _auto_approve_enabled() -> bool:
@@ -267,8 +269,8 @@ def _link_cognito_partner(*, username: str, partner_id: str) -> None:
             Username=username,
             GroupName=PARTNER_GROUP,
         )
-    except Exception:
-        pass
+    except Exception as exc:
+        logger.warning("Failed to link Cognito partner %s to %s: %s", username, partner_id, exc)
 
 
 def reject_request(

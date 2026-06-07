@@ -61,7 +61,7 @@ resource "aws_cloudfront_distribution" "api" {
 
   origin {
     domain_name = local.apigw_host
-    origin_id     = "apigw"
+    origin_id   = "apigw"
 
     custom_origin_config {
       http_port              = 80

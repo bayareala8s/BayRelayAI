@@ -25,5 +25,12 @@ jobs:
           terraform_version: "1.9.0"
           terraform_wrapper: false
 
-      - name: Pytest, Terraform fmt, validate (all envs)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: portal/package-lock.json
+
+      - name: Pytest, Terraform fmt, validate, portal build
         run: bash scripts/ci_verify.sh

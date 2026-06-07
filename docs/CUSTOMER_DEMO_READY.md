@@ -70,7 +70,7 @@ Sign in as **operator** (`bayrelay-operators` group — created automatically fr
 | `enable_operator_portal` | CloudFront SPA |
 | `enable_transfer_automation` | S3 EventBridge → auto transfers |
 | `enable_self_service_onboarding` | Portal onboarding flows |
-| `onboarding_auto_approve` | Instant partner provision (demo only) |
+| `onboarding_auto_approve` | Instant partner provision (set `true` in tfvars for demos only) |
 
 See [SELF_SERVICE_AND_AUTOMATION.md](SELF_SERVICE_AND_AUTOMATION.md), [OPERATIONS_DASHBOARD.md](OPERATIONS_DASHBOARD.md).
 

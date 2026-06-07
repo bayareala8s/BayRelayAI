@@ -101,10 +101,17 @@ environment      = "prod"
 foundation_model = "anthropic.claude-3-sonnet-20240229-v1:0"
 
 enable_api_jwt_auth      = true
-enable_waf               = true
+enable_waf               = false   # regional WAF cannot attach to HTTP API v2
+enable_cloudfront_waf    = true    # edge WAF + public API URL (required for production)
 allow_agent_trace_header = false
 enable_transfer_family   = true
 enable_bedrock_vector_kb = true
+
+# Production onboarding (manual operator approval)
+onboarding_auto_approve         = false
+enable_public_onboarding_submit = false
+enable_operator_portal          = true
+alarm_subscription_emails       = ["ops@customer.com"]
 
 kb_force_destroy                   = false
 transfer_data_bucket_force_destroy = false

@@ -1,5 +1,6 @@
 # Copy to terraform.tfvars before: terraform init && terraform apply
 # Production checklist: docs/PRODUCTION_CHECKLIST.md
+# Customer deployment: docs/CUSTOMER_AWS_DEPLOYMENT.md
 
 aws_region       = "us-west-2"
 project          = "bayrelay"
@@ -7,20 +8,36 @@ environment      = "prod"
 foundation_model = "meta.llama3-1-8b-instruct-v1:0"
 create_vpc       = false
 
+# --- Security (required for customer production) ---
 enable_api_jwt_auth      = true
-enable_waf               = false
-enable_cloudfront_waf    = true
+enable_waf               = false   # regional WAF cannot attach to HTTP API v2
+enable_cloudfront_waf    = true    # edge WAF + public API URL (use this, not enable_waf)
 allow_agent_trace_header = false
 
-kb_force_destroy                   = false
-transfer_data_bucket_force_destroy = false
-
+# --- Features ---
 enable_transfer_family        = true
 enable_bedrock_vector_kb      = true
 bedrock_kb_embedding_model_id = "amazon.titan-embed-text-v1"
+enable_operator_portal        = true
+enable_self_service_onboarding = true
+enable_transfer_automation    = true
+
+# --- Onboarding (production: manual operator approval) ---
+onboarding_auto_approve         = false
+enable_public_onboarding_submit = false
+
+# --- Data retention (keep false for customer prod) ---
+kb_force_destroy                   = false
+transfer_data_bucket_force_destroy = false
 
 bedrock_prepare_agent = true
 # After deploy: ./scripts/publish_bedrock_prod_alias.sh --write-tfvars && terraform apply
 bedrock_agent_alias_id = "TSTALIASID"
 
+# --- Observability ---
 alarm_subscription_emails = ["ops@yourcompany.com"]
+
+# --- CORS (set to portal CloudFront URL after first apply) ---
+# api_cors_allow_origins = ["https://YOUR-portal.cloudfront.net"]
+
+# --- Internal demo only: set onboarding_auto_approve = true for instant partner provisioning ---

@@ -88,7 +88,7 @@ def _query_params(event: dict[str, Any]) -> dict[str, str]:
 
 
 def _public_onboarding_ok() -> bool:
-    return os.environ.get("ENABLE_PUBLIC_ONBOARDING_SUBMIT", "true").lower() in (
+    return os.environ.get("ENABLE_PUBLIC_ONBOARDING_SUBMIT", "false").lower() in (
         "1",
         "true",
         "yes",

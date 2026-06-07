@@ -103,7 +103,7 @@ variable "bedrock_kb_embedding_model_id" {
 
 variable "enable_cloudfront_waf" {
   type        = bool
-  default     = false
+  default     = true
   description = "CloudFront distribution + edge WAF in front of HTTP API (required for WAF with API Gateway v2)."
 }
 
@@ -115,7 +115,7 @@ variable "alarm_subscription_emails" {
 
 variable "enable_operator_portal" {
   type        = bool
-  default     = false
+  default     = true
   description = "Deploy React operator portal (S3 + CloudFront) and enable API CORS for browser clients."
 }
 
@@ -133,8 +133,8 @@ variable "enable_transfer_automation" {
 
 variable "onboarding_auto_approve" {
   type        = bool
-  default     = true
-  description = "Automatically approve onboarding requests and provision partner + endpoints."
+  default     = false
+  description = "Automatically approve onboarding requests and provision partner + endpoints. Set true only for internal demos."
 }
 
 variable "enable_public_onboarding_submit" {

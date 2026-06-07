@@ -36,5 +36,16 @@ bash -n scripts/start_stack.sh
 bash -n scripts/stop_stack.sh
 bash -n scripts/demo_cycle.sh
 bash -n scripts/create_cognito_operator.sh
+bash -n scripts/production_ready.sh
+bash -n scripts/prepare_customer_demo.sh
+
+echo "==> operator portal build"
+(
+  cd portal
+  if [[ ! -d node_modules ]]; then
+    npm ci --no-audit --no-fund
+  fi
+  npm run build
+)
 
 echo "OK: ci_verify.sh passed"

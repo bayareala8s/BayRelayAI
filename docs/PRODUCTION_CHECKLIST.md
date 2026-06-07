@@ -10,6 +10,9 @@ Use before **Production Launch** go-live or external customer access. Automated 
 | `enable_cloudfront_waf` | `true` (edge WAF; required for API Gateway HTTP API) |
 | `bedrock_agent_alias_id` | Published via `publish_bedrock_prod_alias.sh` (not `TSTALIASID`) |
 | `allow_agent_trace_header` | `false` |
+| `onboarding_auto_approve` | `false` |
+| `enable_public_onboarding_submit` | `false` |
+| `enable_operator_portal` | `true` |
 | `kb_force_destroy` | `false` |
 | `transfer_data_bucket_force_destroy` | `false` |
 | `foundation_model` | Model enabled in Bedrock Model access (account-specific) |

@@ -67,6 +67,16 @@ if [[ -f "$tfvars" ]]; then
     ok "Non-draft Bedrock alias configured in terraform.tfvars"
   fi
   grep -qE '^[[:space:]]*allow_agent_trace_header[[:space:]]*=[[:space:]]*false' "$tfvars" && ok "Agent trace header disabled" || warn "allow_agent_trace_header should be false in production"
+  if grep -qE '^[[:space:]]*onboarding_auto_approve[[:space:]]*=[[:space:]]*true' "$tfvars"; then
+    warn "onboarding_auto_approve=true — use false for customer production (demo only)"
+  else
+    ok "Manual onboarding approval (onboarding_auto_approve=false or unset)"
+  fi
+  if grep -qE '^[[:space:]]*enable_public_onboarding_submit[[:space:]]*=[[:space:]]*true' "$tfvars"; then
+    warn "enable_public_onboarding_submit=true — keep false in production"
+  else
+    ok "Public onboarding submit disabled"
+  fi
   grep -qE '^[[:space:]]*enable_operator_portal[[:space:]]*=[[:space:]]*true' "$tfvars" && ok "Operator portal enabled" || warn "enable_operator_portal=false — no customer portal URL"
   grep -qE '^[[:space:]]*enable_transfer_automation[[:space:]]*=[[:space:]]*true' "$tfvars" && ok "Transfer automation enabled" || warn "enable_transfer_automation=false"
   grep -qE '^[[:space:]]*enable_self_service_onboarding[[:space:]]*=[[:space:]]*true' "$tfvars" && ok "Self-service onboarding enabled" || warn "enable_self_service_onboarding=false"
