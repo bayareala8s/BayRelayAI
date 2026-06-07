@@ -60,10 +60,10 @@ def from_event(event: dict[str, Any]) -> AuthContext:
 
     jwt_required = os.environ.get("ENABLE_API_JWT_AUTH", "true").lower() in ("1", "true", "yes")
 
-    if PARTNER_GROUP in groups:
-        role = "partner"
-    elif OPERATOR_GROUP in groups:
+    if OPERATOR_GROUP in groups:
         role = "operator"
+    elif PARTNER_GROUP in groups:
+        role = "partner"
     elif claims and not jwt_required:
         # Legacy demo users without groups — operator only when JWT is optional.
         role = "operator"

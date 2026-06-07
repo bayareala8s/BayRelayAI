@@ -11,26 +11,16 @@ from bayrelay import errors as err
 def list_policies(*, partner_id: str | None = None, limit: int = 100) -> dict[str, Any]:
     table = ddb.routing_policies_table()
     items: list[dict[str, Any]] = []
+    kwargs: dict[str, Any] = {"Limit": min(limit, 200)}
     if partner_id:
-        kwargs: dict[str, Any] = {
-            "KeyConditionExpression": "partner_id = :p",
-            "ExpressionAttributeValues": {":p": partner_id},
-            "Limit": min(limit, 200),
-        }
-        while len(items) < limit:
-            page = table.query(**kwargs)
-            items.extend(page.get("Items", []))
-            if "LastEvaluatedKey" not in page:
-                break
-            kwargs["ExclusiveStartKey"] = page["LastEvaluatedKey"]
-    else:
-        kwargs = {"Limit": min(limit, 200)}
-        while len(items) < limit:
-            page = table.scan(**kwargs)
-            items.extend(page.get("Items", []))
-            if len(items) >= limit or "LastEvaluatedKey" not in page:
-                break
-            kwargs["ExclusiveStartKey"] = page["LastEvaluatedKey"]
+        kwargs["FilterExpression"] = "partner_id = :p"
+        kwargs["ExpressionAttributeValues"] = {":p": partner_id}
+    while len(items) < limit:
+        page = table.scan(**kwargs)
+        items.extend(page.get("Items", []))
+        if len(items) >= limit or "LastEvaluatedKey" not in page:
+            break
+        kwargs["ExclusiveStartKey"] = page["LastEvaluatedKey"]
     return {"ok": True, "status_code": 200, "body": {"policies": items[:limit], "count": len(items[:limit])}}
 
 

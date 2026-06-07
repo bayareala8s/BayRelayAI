@@ -43,6 +43,24 @@ def test_operator_from_groups():
     assert ctx.is_operator
 
 
+def test_operator_wins_when_in_both_groups(monkeypatch):
+    monkeypatch.setenv("ENABLE_API_JWT_AUTH", "true")
+    event = {
+        "requestContext": {
+            "authorizer": {
+                "jwt": {
+                    "claims": {
+                        "sub": "u5",
+                        "cognito:groups": ["bayrelay-partners", "bayrelay-operators"],
+                    }
+                }
+            }
+        }
+    }
+    ctx = auth_context.from_event(event)
+    assert ctx.is_operator
+
+
 def test_jwt_required_denies_unauthenticated(monkeypatch):
     monkeypatch.setenv("ENABLE_API_JWT_AUTH", "true")
     ctx = auth_context.from_event({})
